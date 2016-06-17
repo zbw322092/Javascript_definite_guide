@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+<script>
+	function Person(first, last, age, eye) {
+		this.firstName = first;
+		this.lastName = last;
+		this.age = age;
+		this.eyeColor = eye;
+	}
+
+	var me = new Person ("Bowen", "Zhong", "24", "black");
+	var hui = new Person ("Hui", "Liu", "25", "black");
+
+	// Adding a Property to an Object
+	me.nationality = "Chinese";
+
+	// Adding a Method to an Object
+	me.name = function () {
+		return this.firstName + " " + this.lastName;
+	}
+
+	// You cannot add a new property to a prototype the same way as you add a new property to an existing object, because the prototype is not an existing object.
+	// To add a new property to a constructor, you must add it to the constructor function
+	Person.height = "183cm"
+
+	// The Javascript prototype property allows you to add new properties to an existing prototype.
+	Person.prototype.weight = "75kg";
+
+	// The JavaScript prototype property also allows you to add new methods to an existing prototype
+	Person.prototype.chineseName = function() {
+		return this.lastName + " " + this.firstName;
+	}
+
+	document.getElementById("demo").innerHTML = 
+	"I am " + me.age + " Hui is " + hui.age + " I am " + me.nationality + "<br>"
+	+ " My name is " + me.name() + "<br>"
+	+ " My height is " + me.height + "<br>"
+	+ " My weight is " + me.weight + "<br>"
+	+ " My Chinese name is " + me.chineseName();
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
