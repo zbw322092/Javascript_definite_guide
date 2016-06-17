@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+<script>
+	var o = {};
+	o.x = 1;
+	
+	var p = Object.create(o);
+	p.y = 2;
+
+	var q = Object.create(p);
+	q.z = 3;
+
+	var s = q.toString(); // toString继承自Object.prototype
+
+	document.getElementById('demo').innerHTML = 
+		q.z + " " + q.x + " " + q.y + " " + s.y;
+
+	q.z = 4;
+	q.x = 10;
+	q.a = 11;
+	document.getElementById('demo').innerHTML = 
+		q.z + " " + q.x + " " + o.x + " " + q.a;
+</script>
+
+</body>
+</html>
