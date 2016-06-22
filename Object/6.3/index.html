@@ -1,0 +1,106 @@
+<!-- 删除属性 -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+<script>
+	var book = {
+		author: "Bowen",
+		pages: 322
+	};
+
+	console.log(book);
+
+	delete book.pages;
+	console.log(book);
+
+	book.pages = 666;
+	console.log(book);
+
+	delete book["pages"];
+	console.log(book);
+
+
+	var secondBook = Object.create(book);
+	console.log("second book: ", secondBook);
+
+	secondBook.pages = 999;
+	console.log(secondBook);
+	console.log(secondBook.author);
+	console.log(secondBook.pages);
+
+	delete secondBook.author;
+	console.log(secondBook);
+	console.log(secondBook.author); // cannot delete the attribute that inherit from prototype
+
+	delete book.author;
+	console.log(secondBook);
+	console.log(secondBook.author);
+	console.log(book);
+
+
+	var o = { x: 1 };
+	console.log(delete o.x);
+	console.log(o);
+
+	console.log(delete o.x);
+	console.log(delete o.y);
+
+	console.log("delete o.toString: ", delete o.toString);
+
+	console.log("delete 1: ", delete 1);
+
+
+	console.log("delete Object.prototype", delete Object.prototype);
+
+	var x = 1; // 不可配置
+	console.log(delete this.x);
+	console.log(delete x);
+
+	function f() {}; // 不可配置
+	console.log(f);
+	console.log(f());
+	console.log(delete this.f);
+
+
+	// var y = 10;
+	this.y = 2; // 可配置的全局属性（没有用var）
+	console.log(y);
+	console.log(this.y);
+
+	console.log(delete y); // 当上面 var y = 10;和this.y = 2;并存的时候，delete y会返回false, 因为这时的y是不可配置的全局变量。
+	console.log(y);
+
+
+</script>
+
+<script>
+	// console.log(x);
+	// console.log("delete this.x in another script tag: ", delete this.x);
+</script>
+
+<!-- strict mode -->
+<script>
+	// write use strict here affect the whole file.
+	// use strict
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
