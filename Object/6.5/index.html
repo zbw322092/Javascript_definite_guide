@@ -1,0 +1,138 @@
+<!-- 枚举属性 -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+	var o = {
+		x: 1,
+		y: 2,
+		z: 3
+	};
+
+	for(p in o) {
+		console.log(p);
+	};
+
+	console.log(p);
+
+
+	var bowen = Object.create(o);
+	console.log(bowen);
+
+	bowen.height = 183;
+	bowen.weight = 75;
+	console.log(bowen);
+
+	for (p in bowen) {
+		if (bowen.hasOwnProperty(p)) {
+			console.log(p);
+		}
+	}
+
+
+
+	function extend(o, p) {
+		for(prop in p) {
+			o[prop] = p[prop];
+		}
+		return o;
+	}
+
+	var p = {
+		ok: 100,
+		notOk: 10,
+		unknown: 1
+	}
+
+	extend(o, p);
+
+	console.log(o);
+
+
+
+	function merge(o, p) {
+		for (prop in p) {
+			if(o.hasOwnProperty(prop)) continue;
+			o[prop] = p[prop];
+		}
+		return o;
+	}
+
+	p.x = 1000;
+	console.log(p);
+
+	console.log(merge(o,p));
+
+
+
+	function restrict(o, p) {
+		for (prop in o) {
+			if (!p.hasOwnProperty(prop))
+				delete o[prop];
+		}
+		return o;
+	}
+
+	console.log(restrict(o, p));
+
+
+
+	function union(o, p) {
+		return extend(extend({}, o), p);
+	}
+	console.log("o: ", o);
+	console.log("p: ", p);
+	console.log(union(o, p));
+
+
+	function keys(o) {
+		var array = [];
+		if(typeof(o) !== "object") throw "wrong type";
+		for(prop in o) {
+			if(o.hasOwnProperty(prop)) array.push(prop);
+		}
+		return array;
+	}
+	console.log(o);
+	console.log(keys(o));
+
+	var k = 1;
+	// console.log(keys(k));
+
+
+	function keysWithoutTypeJudgement(o) {
+		var array = [];
+		// if(typeof(o) !== "object") throw "wrong type";
+		for(prop in o) {
+			if(o.hasOwnProperty(prop)) array.push(prop);
+		}
+		return array;		
+	}
+	console.log("o: ", o);
+	console.log(keysWithoutTypeJudgement(k)); // the result is []
+
+	for(prop in k) {
+		console.log(prop); // the line will not be executed
+	}
+
+
+	console.log("o: ", o);
+	var s = Object.create(o);
+	s.y =666;
+	console.log(s);
+	console.log(Object.keys(s));
+	console.log(Object.getOwnPropertyNames(s));
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

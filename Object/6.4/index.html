@@ -1,0 +1,63 @@
+<!-- 检测属性 -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+	var o = { x : 1 };
+
+	// console.log(x in o);
+	console.log("x" in o);
+	console.log("y" in o);
+
+	console.log("toString" in o);
+
+
+	var p = { x : 1 };
+	console.log(p);
+
+	var p = { "x" : 1 };
+	console.log(p);
+
+
+	var o = { y : 1 };
+	console.log(o.hasOwnProperty("y"));
+	console.log(o.hasOwnProperty("x"));
+	console.log(o.hasOwnProperty("toString"));
+
+
+	var o = Object.create({ y : 2 });
+	console.log(o);
+	o.x = 10;
+
+	// o有一个可枚举的自有属性x
+	console.log("property is enumerable: ", o.propertyIsEnumerable("x"));
+	// y是继承来的
+	console.log("property is enumerable: ", o.propertyIsEnumerable("y"));
+	// 不可枚举
+	console.log("property is enumerable: ", Object.prototype.propertyIsEnumerable("toString"));
+
+
+
+	var o = { x: 1 };
+	console.log(o.x !== undefined);
+	console.log(o.y !== undefined);
+	console.log(o.toString !== undefined);
+
+	// console.log(typeof(undefined));
+	// console.log(typeof(null));
+	// console.log(undefined == null);
+	// console.log(undefined === null);
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
