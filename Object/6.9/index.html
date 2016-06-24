@@ -1,0 +1,71 @@
+<!-- 序列化对象 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+  	var o = {
+  		x: 1,
+  		y: {
+  			z: [false, null, ""]
+  		}
+  	};
+
+  	var s = JSON.stringify(o);
+  	var p = JSON.parse(s);
+
+  	console.log("s: ", s);
+  	console.log(typeof(s));
+  	// p是o的深拷贝
+  	console.log("p: ", p);
+  	console.log(typeof(p));
+
+  	console.log(JSON.stringify(NaN));
+  	console.log(JSON.stringify(Infinity));
+  	console.log(JSON.stringify(-Infinity));
+
+  	var d = new Date();
+  	console.log(d.getTime());
+  	console.log(JSON.stringify(d.getTime()));
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

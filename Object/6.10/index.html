@@ -1,0 +1,88 @@
+<!-- 对象方法 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    var s = { x: 1, y: 1}.toString();
+    console.log(s);
+
+    // 数组转化为字符串的时候,结果是一个数组元素列表,只是每个元素都转化成了字符串。
+    var p = [1, 2, 3, 4, 5].toString();
+    console.log(p);
+
+    var q = [{x: 1}, {y: 2}];
+    console.log(q);
+    console.log(q.toString());
+
+    var f = function() {
+      return "That's ok";
+    }.toString();
+    console.log(f);
+
+    var n = 100;
+    console.log(typeof(n));
+    console.log(n.toString());
+    console.log(n);
+    console.log(n.toLocaleString());
+    console.log(n.toLocaleString() == n.toString());
+    console.log(n.toLocaleString() === n.toString());
+
+
+    var ff = function() {
+      return "That's ok";
+    }
+    console.log(ff.valueOf());
+    console.log(ff.toString());
+
+    console.log(typeof(ff.valueOf()));
+    console.log(typeof(ff.toString()));
+
+
+    var a = 100;
+    console.log(a.valueOf());
+    console.log(a.toString());
+
+    console.log(typeof(a.valueOf()));
+    console.log(typeof(a.toString()));
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
