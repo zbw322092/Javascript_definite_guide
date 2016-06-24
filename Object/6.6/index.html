@@ -1,0 +1,112 @@
+<!-- 属性getter和setter -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+	var p = {
+		// 普通可读写的数据属性
+		x: 1.0,
+		y: 1.0,
+
+		// r是可读写的存取器属性，它有getter和setter
+		get r() {
+			return Math.sqrt(this.x*this.x + this.y*this.y);
+		},
+		set r(newvalue) {
+			var oldvalue = Math.sqrt(this.x*this.x + this.y*this.y);
+			var ratio = newvalue/oldvalue;
+			this.x *= ratio;
+			this.y *= ratio;
+		},
+
+		// theta是只读存取器属性，它只有getter方法
+		get theta() {
+			return Math.atan2(this.y, this.x);
+		}
+	}
+
+	console.log(p);
+
+	var q = Object.create(p);
+	console.log(q);
+
+	q.x = 10;
+	q.y = 10;
+
+	console.log(q.x);
+	console.log(q.r);
+	console.log(q.theta);
+	// Uncaught TypeError: q.r is not a function
+	// console.log(q.r());
+
+
+	var serialnum = {
+		$n: 0,
+		// 返回当前值，然后自增
+		get next() { return this.$n++ },
+
+		set next(n) {
+			if ( n >= this.$n) this.$n = n;
+			else throw "too small";
+		}
+	};
+
+	console.log(serialnum);
+	console.log(serialnum.next);
+
+	serialnum.next;
+	console.log(serialnum.next);
+
+	console.log(serialnum.get);
+
+
+	var random = {
+		get octet() {
+			return Math.floor(Math.random() *256);
+		},
+		get uint16() {
+			return Math.floor(Math.random() *65536);
+		},
+		get int16() {
+			return Math.floor(Math.random() *65536)-32768;
+		}
+	};
+
+	// every time calling random object, random object will generate different value
+	console.log("random: ", random);
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

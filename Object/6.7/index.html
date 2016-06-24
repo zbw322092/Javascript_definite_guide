@@ -1,0 +1,143 @@
+<!-- 属性的特性 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+
+  console.log(Object.getOwnPropertyDescriptor({ x: 1 }, "x"));
+
+  
+  var random = {
+    get octet() {
+      return Math.floor(Math.random() * 256);
+    },
+    get uint16() {
+      return Math.floor(Math.random() * 65536);
+    },
+    get int16() {
+      return Math.floor(Math.random() * 65536) - 32768;
+    }
+  };
+
+  console.log(Object.getOwnPropertyDescriptor(random, "octet"));
+
+  // 对于继承和不存在的属性返回undefined
+  console.log(Object.getOwnPropertyDescriptor({}, "x"));
+  console.log(Object.getOwnPropertyDescriptor({}, "toString"));
+
+  var o = {};
+  Object.defineProperty(o, "x", {
+  	value: 1,
+  	writable: true,
+  	enumerable: false,
+  	configurable: true
+  });
+
+  console.log(Object.getOwnPropertyDescriptor(o, "x"));
+
+  console.log(o);
+  console.log(o.x);
+
+  // enumerable is false
+  console.log(Object.keys(o));
+  
+  // 因为属性特性是writable = true, 所以可以通过下面这样的方式改变其value
+  o.x = 10;
+  console.log(o.x);
+
+  Object.defineProperty(o, "x", {
+  	writable: false
+  });
+  console.log(Object.getOwnPropertyDescriptor(o, "x"));
+
+  // writable is false, so cannot change x value by this way. No error will throw, although this operation falls. However in strict mode, this operation will throw a wrong type error.
+  o.x = 100;
+  console.log(o.x);
+
+  // o.x is configurable
+  Object.defineProperty(o, "x", {
+  	value: 1000
+  });
+  console.log(o.x);
+
+
+  Object.defineProperty(o, "x", {
+  	get: function() {
+  		return 0;
+  	}
+  });
+  console.log(o);
+  console.log(o.x);
+
+  Object.defineProperty(o, "x", {
+  	configurable: false
+  });
+
+  console.log(Object.getOwnPropertyDescriptor(o, "x"));
+
+  // Uncaught TypeError: Cannot redefine property: x
+  // Object.defineProperty(o, "x", {
+  // 	configurable: true
+  // });
+  
+
+  Object.defineProperty(Object.prototype, "extend", 
+  	{
+  		writable: true,
+  		enumerable: false,
+  		configurable: true,
+  		value: function(o) {
+  			var names = Object.getOwnPropertyNames(o);
+  			for (var i = 0; i < names.length; i++) {
+  				if (names[i] in this) continue;
+  				var desc = Object.getOwnPropertyDescriptor(o, names[i]);
+  				Object.defineProperty(this, names[i], desc);
+  			}
+  		}
+  	});
+
+  console.log(Object.prototype.extend);
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
