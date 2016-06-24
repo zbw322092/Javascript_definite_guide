@@ -1,0 +1,153 @@
+<!-- 对象的三个属性 -->
+<!-- 属性的特性 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+  	var p = {x : 1};
+  	var o = Object.create(p);
+
+  	console.log(o);
+  	console.log(p.isPrototypeOf(o));
+  	console.log(Object.prototype.isPrototypeOf(p));
+
+  	// do not recommend to use this way to get/set the prototype of object, since IE and Opera have not support this method.
+  	console.log(o.__proto__);
+
+  	var s = {};
+  	s.__proto__ = p;
+  	console.log(s);
+
+
+  	console.log(o.toString());
+  	
+  	var q = "what class";
+  	console.log(q.toString());
+
+
+  	function classof(o) {
+  		if (o === null) return "Null";
+  		if (o === undefined) return "Undefined";
+  		return Object.prototype.toString.call(o).slice(8,-1);
+  	}
+
+  	console.log(classof(o));
+  	console.log(classof(p));
+
+	console.log(classof(null));
+	console.log(classof(1));
+	console.log(classof(""));
+	console.log(classof(false));
+	console.log(classof({}));
+	console.log(classof([]));
+	console.log(classof(/./));
+	console.log(classof(new Date()));
+	console.log(classof(window));
+	function f() {};
+	console.log(classof(new f()));
+
+
+
+	var t = {x : 1};
+	console.log(t);
+	console.log(Object.getOwnPropertyDescriptor(t, "x"));
+	t.x = 10;
+	console.log(t);
+	console.log(Object.getOwnPropertyDescriptor(t, "x"));
+
+	console.log(Object.isExtensible(t));
+
+	var tt = Object.create(t);
+	console.log(tt);
+
+	console.log(Object.getOwnPropertyDescriptor(tt, "x"));
+	tt.y = 100;
+
+	console.log(Object.getOwnPropertyDescriptor(tt, "y"));
+	console.log(Object.isExtensible(tt));
+
+	Object.preventExtensions(tt);
+	console.log(Object.isExtensible(tt));
+
+	tt.z = "not extensible";
+	console.log(tt);
+
+	// Object.preventExtensions()只影响到自身，当其原型添加属性的时候，这个不可扩展的对象仍会继承这些属性。
+	t.z = "not extensible";
+	console.log(tt);
+
+	console.log(Object.getOwnPropertyDescriptor(tt, "y"));
+
+	Object.seal(tt);
+	console.log(Object.getOwnPropertyDescriptor(tt, "y"));
+
+	tt.y = 1000;
+	t.t = "can I configure it?";
+	console.log(tt);
+
+	console.log(Object.isSealed(tt));
+
+	Object.freeze(tt);
+	console.log(Object.isFrozen(tt));
+	console.log(Object.getOwnPropertyDescriptor(tt, "y"));
+
+	tt.y = 666;
+	console.log(tt);
+
+
+	var oo = Object.seal(
+		Object.create(
+			Object.freeze({x: 1}),
+			{
+				y: {
+				value: 2,
+				writable: true
+				}
+			}
+		)
+	)
+
+	console.log(oo);
+	console.log(oo.x);
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
