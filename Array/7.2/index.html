@@ -1,0 +1,83 @@
+<!-- 数组元素的读和写 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    // js将数字索引值转化成字符串，这点在object中也一样
+    var o = {};
+    o[1] = "one";
+    console.log(o);
+
+    var a = new Array();
+    console.log(a);
+    
+    a[1] = 2;
+    console.log(a);
+
+    a[0] = 1;
+    console.log(a);
+
+    a[1.2] = 10;
+    console.log(a);
+
+    a[-1.2] = 100;
+    console.log(a);
+
+    a["ok"] = 1000;
+    console.log(a);
+
+    // Uncaught ReferenceError: ok is not defined
+    // a[ok] = 10000;
+    // console.log(a);
+    
+    // 如果索引凑巧使用了是非负整数的字符串，它就当做是数组索引个，而非对象属性。
+    a["2"] = 3;
+    console.log(a);
+
+    console.log(a[2.000]); // 3
+    console.log(a["2.000"]); // undefined
+    console.log(a["2"]); // 3
+
+    console.log(a["ok"]);
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
