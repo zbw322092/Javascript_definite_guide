@@ -28,6 +28,17 @@
   var g = [val, val*10];
   console.log(g);
 
+
+  // var g = [h, i, j]; // Uncaught ReferenceError: h is not defined
+  var g = ["h", "i", "j"];
+  console.log(g);
+
+  var h = [1, 2, 3],
+  i = [4, 5, 6],
+  j = [7, 8, 9];
+  var g = [h, i, j];
+  console.log(g);
+
   </script>
 </body>
 
