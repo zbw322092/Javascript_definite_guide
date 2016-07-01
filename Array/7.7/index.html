@@ -1,0 +1,62 @@
+<!-- 多维数组 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    var table = new Array(10);
+    for (var i=0, len = table.length; i < len; i++) {
+        table[i] = new Array(10);
+    }
+    console.log(table);
+
+    for (var row = 0, len = table.length; row < len; row++) {
+        for (var col = 0, len= table[row].length; col < len; col++ ) {
+            table[row][col] = row*col
+        }
+    }
+
+    console.log(table);
+    console.log(table[6][9]);
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
