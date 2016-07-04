@@ -1,0 +1,85 @@
+<!-- 类数组对象 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    var a = {}, i = 0;
+    while (i < 10) {
+      a[i] = i*i;
+      i++;
+    }
+    a.length = i;
+    console.log(a);
+
+    // 现在可以把它当做真正的数组遍历它
+    var sum = 0;
+    for (var x = 0; x < a.length; x++) {
+      sum += a[x];
+    }
+    console.log(sum);
+
+    // 判定o是否是一个类数组对象
+    function isArrayLike(o) {
+      if (o &&
+        typeof o === "object" &&
+        isFinite(o.length) &&
+        o.length >= 0 &&
+        o.length === Math.floor(o.length) &&
+        o.length < 4294967296 )
+        return true;
+      else
+        return false;
+    }
+
+    var o = {
+      1: 'a',
+      2: 'b',
+      length: 2
+    };
+    console.log(isArrayLike(o));
+
+    var oo = {
+      1: 'a',
+      2: 'b',
+      length: -2
+    };
+    console.log(isArrayLike(oo));
+
+    // 因为类数组对象没有继承自Array.prototype，所以它不能直接使用数组的方法，但是可以间接的使用Function.call方法调用。
+    var b = {
+      0: 'a',
+      1: 'b',
+      2: 'c',
+      length: 3
+    };
+
+    console.log(Array.prototype.join.call(b, '+'));
+    // Uncaught TypeError: b.join is not a function
+    // b.join('+');
+
+    console.log(Array.prototype.slice.call(b, 0));
+
+    console.log(Array.prototype.map.call(b, function(x) {
+      return x.toUpperCase();
+    }));
+
+
+    // the following codes are working in firefox, not working in chrome, since the following usage is defiend by firefix after version 1.5
+    // console.log(Array.join(b, '+'));
+    // console.log(Array.slice(b, 1 ,2));
+    // console.log(Array.map(b, function(x) {
+    //   return x.toUpperCase(x);
+    // }));
+    
+    // in order to ensure the compatibility, we can use the following codes to ensure the existing of above methods.
+    Array.join = Array.join || function(a, sep) {
+      return Array.prototype.join.call(a, sep);
+    }
+    console.log(Array.join(b, '&'));
+
+
+  </script>
+</body>
+
+</html>
