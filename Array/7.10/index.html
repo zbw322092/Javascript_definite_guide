@@ -1,0 +1,23 @@
+<!-- 数组类型 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    console.log(Array.isArray([1,2,3]));
+    console.log(Array.isArray({1:'a', 2: 'b', 3: 'c'}));
+
+    console.log(typeof([1,2,3])); // object
+    console.log(typeof({1:'a'})); // object
+
+    // 等同与es5中Array.isArray()效果的写法
+    var isArray  = Function.isArray || function (o) {
+      return typeof o === "object" &&
+      Object.prototype.toString.call(o) === "[object Array]"
+    }
+    console.log(isArray([1,2,3]));
+    console.log(isArray({1: 'a'}));
+  </script>
+</body>
+
+</html>
