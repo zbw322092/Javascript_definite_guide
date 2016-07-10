@@ -1,0 +1,72 @@
+<!-- 函数定义 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+
+   // 函数定义有两种方法，
+   // 一种是函数定义表达式，这种定义方法可以在文件中任何地方调用被定义的函数，
+   // 因为函数声明语句"被提前"到外部脚本或者外部函数作用域的顶部。
+   // 第二种是函数声明语句，这种必须在函数定义了之后（注意不是被赋值的变量声明之后）才能被调用。 
+
+   test();
+   // 在这里call function的话会报错，Uncaught TypeError: f is not a function.
+   f();
+   var f;
+   
+   function test() {
+   	console.log('It is a function testing');
+   }
+
+
+   f = function test2() {
+   	console.log('It is another function testing');
+   }
+
+   // 如果是在这里调用函数就不会报错。
+   // f();
+   
+
+   
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
