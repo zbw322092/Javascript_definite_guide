@@ -1,0 +1,124 @@
+<!-- 作为值的函数 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    // 函数的名字实际上是看不见的，我们命名的函数名仅仅是变量的名字，这个变量指代函数对象。
+    function square(x) {
+      return x*x;
+    }
+
+    var s = square;
+
+    console.log(square(4)); // 16
+    console.log(s(4)); // 16
+
+
+    var o = {
+      square: function(x) { return x*x }
+    }
+    console.log(o.square(16)); // 函数作为对象的属性调用时，函数就称为方法。
+
+
+    // 把函数赋值给数组元素
+    var a = [function(x) { return x*x; }, 100];
+    console.log(a[0](a[1])); // 10000
+
+
+    function add(x, y) { return x + y; }
+    function substract(x, y) { return x - y; }
+    function multiply(x, y) { return x * y; }
+    function divide(x, y) { return x / y; }
+
+    function operate(operator, operand1, operand2) {
+      return operator(operand1, operand2);
+    }
+    var i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5));
+    console.log(i);
+
+    var operators = {
+      add: function(x, y) { return x + y; },
+      substract: function(x, y) { return x - y; },
+      multiply: function(x, y) { return x * y; },
+      divide: function(x, y) { return x / y; },
+      pow: Math.pow
+    };
+
+    function operate2(operation, operand1, operand2) {
+      if (typeof operators[operation] === "function")
+        return operators[operation](operand1, operand2);
+      else throw "unknown operator";
+    }
+    var j = operate2("add", "hello", operate2("add", " ", "world"));
+    console.log(j);
+    var k = operate2("pow", 10, 2);
+    console.log(k);
+
+
+    // 下例中通过给函数设置属性，避免了命名一个全局变量来储存状态。这是自定义函数
+    // 属性的一个用法。函数是一种特殊的对象。
+    uniqueInteger.counter = 0;
+    function uniqueInteger() {
+      return uniqueInteger.counter++;
+    }
+    console.log(uniqueInteger()); // 0
+    console.log(uniqueInteger()); // 1
+    console.log(uniqueInteger()); // 2
+
+
+    // 下面的例子中使用自身的属性，将自身当做数组来对待，来缓存上一次的计算结果。
+    function factorial(n) {
+      if (isFinite(n) && n > 0 && n == Math.round(n)) {
+        if (!(n in factorial))
+          factorial[n] = n * factorial(n-1);
+        return factorial[n];
+      }
+      else return 'not ok';
+    }
+    factorial[1] = 1;
+
+    console.log(factorial(10));
+    console.log(factorial(8));
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
