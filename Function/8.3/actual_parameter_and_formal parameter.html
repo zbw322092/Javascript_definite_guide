@@ -1,0 +1,179 @@
+<!-- 函数的实参和形参 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    // "use strict";
+
+    // 不定实参函数
+    function max() {
+      var max = Number.NEGATIVE_INFINITY;
+
+      for (var i = 0; i < arguments.length; i++)
+        if (arguments[i] > max) max = arguments[i];
+        return max;
+    }
+
+    console.log(max(1, 29,731,2,47,99,37,294,318,-10,374,26));
+    console.log(max()); // -infinity
+
+    // 之前将上面的函数写成了这样：
+    function maxTesting() {
+      var max = Number.NEGATIVE_INFINITY;
+
+      for (var i = 0; i < arguments.length; i++) {
+        if (arguments[i] > max) max = arguments[i];
+        return max;
+      }
+    }
+    // 因为执行到return函数会直接停止执行，那么上述的函数输出的结果一直都会只是第一个实参
+    console.log(maxTesting(1, 29,731,2,47,99,37,294,318,-10,374,26)); // 1
+
+
+    function f(x) {
+      console.log(x);
+      arguments[0] = null;
+      console.log(x);
+    }
+    f('aha'); // 在严格模式下，函数中的两个console出来的结果都是'aha'
+
+
+    var factorial = function(x) {
+      if (x <= 1) return 1;
+      return x * arguments.callee(x-1);
+    }
+    console.log(factorial(5));  // 120
+
+    
+    var factorialTesting = function(x) {
+      console.log(arguments.callee); // 指代当前正在执行的函数
+      console.log(arguments.caller);
+      return "It is a caller adn callee testing" + ' ' + x;
+    }
+    factorialTesting('haha');
+
+
+    // 下面的两个函数展示了怎么将对象属性用做实参。用对象属性做实参的好处是当一个函数形参
+    // 非常长的时候，调用函数的时候就不用刻意记住实参的顺序。
+    function arraycopy(from, from_start, to, to_start, length) {
+      // from array, from_start index, to array, to_start index, length integer
+      // ... 
+    }
+
+    function easycopy(args) {
+      arraycopy(args.from, args.from_start||0, args.to, args.to_start||0, args.length);
+    }
+
+    var a = [1,2,3,4], b =[];
+    easycopy({
+      from: a,
+      to: b,
+      length: 4
+    });
+
+
+
+    // 下面的示例中对传入的实参进行类型的检查
+    function isArrayLike(o) {
+      if (o &&
+        typeof o === "object" &&
+        isFinite(o.length) &&
+        o.length >= 0 &&
+        o.length === Math.floor(o.length) &&
+        o.length < 4294967296 )
+        return true;
+      else
+        return false;
+    }
+
+    function sum(a) {
+      if (isArrayLike(a)) {
+        var total = 0;
+        for (var i=0; i<a.length; i++) {
+          var element = a[i];
+          if (element === null) continue;
+          if (isFinite(element)) total += element;
+          else throw new Error("sum(): element must be finite numbers");
+        }
+        return total;
+      } else 
+      throw new Error("sum(): argument must be array-like");
+    }
+
+    console.log(sum([2,3,5,2,4,5,63,6,23,5,9]));
+    console.log(sum({
+      0: 23,
+      1: 39,
+      2: 92,
+      length: 3
+    })); // 154   这里传入的是一个类数组对象
+    console.log(sum[2,4,24,'ok',9]); // undefined
+
+
+    function flexisum(a) {
+      var total = 0;
+      for (var i = 0; i < arguments.length; i++) {
+        var element = arguments[i], n;
+        if (element == null) continue;
+        if (isArrayLike(element))
+          n = flexisum.apply(this, element);
+        else if (typeof element === 'function')
+          n = Number(element());
+        else
+          n = Number(element);
+        if (isNaN(n))
+          throw Error("flexisum(): can't convert " + element + " to number");
+        total += n;
+      }
+      return total;
+    }
+
+    console.log(flexisum([3,52,5,31,8,95]));
+    console.log(flexisum(function() {
+      return 2+41+34;
+      // return;  // 如果直接返回，会报126行的错误
+    }));
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
