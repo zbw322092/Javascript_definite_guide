@@ -49,7 +49,114 @@
    
     var strict = (function() { return !this; }());
     console.log(strict);
-   
+
+
+
+    // 方法调用:
+    var calculator = {
+      operand1: 1,
+      operand2: 1,
+      add: function() {
+        this.result = this.operand1 + this.operand2;
+      },
+      subtract: function(x, y) {
+        return x-y;
+      },
+      name: function(firstname, lastname) {
+        return firstname + ' ' + lastname;
+      }
+    };
+    console.log(calculator.add()); // undefined. 因为没有return语句来返回值
+    console.log(calculator.result); // 2
+    console.log(calculator["add"]);
+    console.log(calculator["add()"]);
+
+    console.log(calculator.subtract(4,2));
+    console.log(calculator["subtract"](4,2));
+
+    console.log(calculator.name('Bowen', 'Zhong'));
+    // 调用结束后再调用
+    console.log(calculator.name('Bowen', 'Zhong').toUpperCase());
+
+
+    var o = {
+      m: function() {
+        var self = this;
+        console.log(this === o); // true
+        console.log(this); // Object{...}
+        f();
+        function f() {
+          // 嵌套的函数不会从调用它的函数中继承this。
+          // 如果嵌套函数作为方法调用，其this的值指向调用它的对象。如果嵌套函数作为函数
+          // 调用，其this值不是全局对象（非严格模式下）就是undefined（严格模式下）。
+          console.log(this === o); // false
+          console.log(this); // undefined
+          console.log(self === o); // true
+        }
+      }
+    };
+
+    o.m();
+
+
+    var oo = {
+      m: function name() {
+        var self = this;
+        console.log(this === oo); // true
+        console.log(this); // Object{...}
+
+        console.log('My name is Bowen Zhong');
+        function f() {
+          console.log(this === oo); // false
+          console.log(this); // undefined
+          console.log(self === oo); // true
+
+          console.log('It is another function');
+        }
+      }
+    };
+
+    oo.m(); // 输出了第一层function中的内容
+    // 下面这两种调用方法都不行，因为oo.m()返回的不是object
+    // oo.m().f();
+    // oo.m.f();
+    
+    var ooo = {
+      m: {
+        name: function(firstname, lastname) {
+          return 'It is ' + firstname + ' ' + lastname;
+        }
+      }
+    };
+    console.log(ooo.m.name('Bowen', 'Zhong').toUpperCase()); 
+
+
+    // 在没有形参的情况下，可以省略后面的括号
+    var q = new Object();
+    var p = new Object;
+    console.log(q); 
+    console.log(p); 
+
+    var s = new Object(
+      {
+        m: function() {
+          return console.log('It is a testing');
+        }
+      }
+    );
+    console.log(s);
+    s.m(); // 在console中显示的是143行产出了结果，而不是148行（即调用行）
+
+    var ss = new Object(
+      {
+        m: function() {
+          console.log(this);
+          console.log('It is a testing');
+        }
+      }
+    );
+    ss.m();
+
   </script>
 </body>
 
