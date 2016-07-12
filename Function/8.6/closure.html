@@ -1,0 +1,176 @@
+<!-- 闭包 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    var scope = "global scope";
+    function checkscope() {
+      var scope = "local scope";
+      function f() {
+        return scope;
+      }
+      return f();
+    }
+
+    console.log(checkscope()); // local scope
+
+    
+    function checkscope2() {
+      var scope = "local scope";
+      function f() {
+        return scope;
+      }
+      return f;
+    }
+    console.log(checkscope2()());  // local scope
+
+
+    var uniqueInteger = (function() {
+      var counter = 0;
+      return function() {
+        return counter++;
+      }
+    }());
+    console.log(uniqueInteger()); // 0
+    console.log(uniqueInteger()); // 1
+
+
+    function counter() {
+      var n = 0;
+      return {
+        count: function() { return n++; },
+        reset: function() { n = 0; }
+      }
+    }
+    var c = counter(), d = counter();
+
+    console.log(c.count()); // 0
+    console.log(d.count()); // 0
+
+    c.reset();
+    console.log(c.count()); // 0, 因为上面重置了c
+
+    console.log(d.count()); // 1, d没有受到影响
+
+    console.log(window.c);
+    console.log(window.d);
+
+
+    // 这是一个不使用闭包的例子
+    function counter2() {
+      var n = 0;
+      return {
+        count: n++
+      }
+    };
+    var e = counter2();
+    console.log(e.count); // 0
+    console.log(e.count); // 0
+
+
+    function counter3(n) {
+      return {
+        get count() {
+          return n++;
+        },
+        set count(m) {
+          if (m >= n) n = m;
+          else throw Error("count can only be set to a larger value");
+        }
+      };
+    }
+
+    var c = counter3(1000);
+    console.log(c);
+    console.log(c.count);  // 1000
+    console.log(c.count);  // 1001
+
+    c.count = 2000;
+    console.log(c.count);
+    // c.count = 2000; // Uncaught Error: count can only be set to a larger value
+
+
+    function addPrivateProperty(o, name, predicate) {
+      var value;
+      // getter方法简单的将其返回
+      o["get" + name] = function() { return value; }
+
+      // setter方法首先检查值是否合法，合法则储存，不合法则报错
+      o["set" + name] = function(v) {
+        if (predicate && !predicate(v))
+          throw Error("set" + name + " :invalid value" + v);
+        else
+          value = v;
+      };
+    }
+
+    var o = {};
+    addPrivateProperty(o, "Name", function(x) {
+      return typeof x == "string";
+    });
+
+    o.setName("Frank");
+    console.log(o.getName());
+    // o.setName(0);
+
+
+    function constfunc(v) {
+      return function() { return v; }
+    }
+    var funcs = [];
+    for (var i = 0; i < 10; i++) funcs[i] = constfunc(i);
+    console.log(funcs);
+    console.log(funcs[5]()); // 5
+
+
+    function constfuncs() {
+      var funcs = [];
+      for (var i = 0; i < 10; i++)
+        funcs[i] = function() { return i; };
+      return funcs;
+    }
+    var funcs = constfuncs();
+    console.log(funcs);
+    console.log(funcs[5]());
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
