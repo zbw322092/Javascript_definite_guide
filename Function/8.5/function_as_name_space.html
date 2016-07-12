@@ -1,0 +1,124 @@
+<!-- 作为命名空间的函数 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    var extend = (function() {
+
+      for (var p in {toString: null}) {
+        return function extend(o) {
+          for (var i =1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var prop in source) o[prop] = source[prop];
+          }
+          return o;
+        };
+      }
+
+      return function patched_extend(o) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var prop in source) o[prop] = source[prop];
+          for (var j = 0; j < protoprops.length; j++) {
+            prop = protoprops[j];
+            if (source.hasOwnProperty(prop)) o[prop] = source[prop];       
+          }
+        }
+        return o;
+      };
+
+      var protoprops = ["toString", "valueOf", "constructor", "hasOwnProperty", "isPrototypeOf", "propertyIsEnumerable", "toLocaleString"];
+    }());
+
+    console.log(extend({
+      1: 'a',
+      2: 'b'
+    }));
+
+
+    var testing = function(o) {
+      var sum = 0;
+      for (var i =0; i<o.length; i++) {
+        sum += o[i];
+      }
+      return sum;
+    }
+
+    console.log(testing([1,2,3,4,5]));
+
+
+    // 像下面这样写的话会报错 Uncaught TypeError: Cannot read property 'length' of undefined，因为直接自调用了，所以o不确定是什么类型的数据。
+    // (function(o) {
+    //   var sum = 0;
+    //   for (var i =0; i<o.length; i++) {
+    //     sum += o[i];
+    //   }
+    //   return sum;
+    // }());
+
+    var testing2 = (function(o) {
+      var sum = 0;
+      for (var i =0; i<arguments.length; i++) {
+        sum += o[i];
+      }
+      return sum;
+    }());
+
+    console.log(testing2);
+    // console.log(testing2([1,2,3,4,5])); // Uncaught TypeError: testing2 is not a function
+
+
+
+    var testing3 = (function(o) {
+      var sum = 0,
+      o = [1,2,3,4,5,6];
+      for (var i =0; i<o.length; i++) {
+        sum += o[i];
+      }
+      return sum;
+    }());
+
+    console.log(testing3);
+    
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
