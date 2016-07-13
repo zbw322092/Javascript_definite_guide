@@ -1,0 +1,145 @@
+<!-- 函数属性、方法和构造函数 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    function check(args) {
+      // 实际传入实参数
+      var actual = args.length;
+      // 期望传入实参数
+      var expected = args.callee.length;
+
+      if (actual !== expected)
+        throw Error("Expected " + expected + " args; got " + actual);
+    }
+
+    function f(x, y, z) {
+      check(arguments);
+      return x + y + z;
+    }
+
+    console.log(f(1,2,3));
+    // console.log(f(1,2,3,4));
+
+    console.log(f.prototype);
+
+    var o = {
+      firstName: 'Bowen',
+      lastName: 'Zhong',
+      age: '23',
+      height: '183'
+    }
+
+    function person(o) {
+      console.log("My name is ", o.firstName + ' ' + o.lastName);
+    } 
+    person(o);
+
+
+    var array_of_numbers = [2,3,46,31,356,82,46,5,96];
+    var biggest = Math.max.apply(Math, array_of_numbers);
+    console.log(biggest);
+
+    function trace(o, m) {
+      var original = o[m];
+      o[m] = function() {
+        console.log(new Date(), "Entering:", m);
+        var result = original.apply(this, arguments);
+        console.log(new Date(), "Exiting:", m);
+        return result;
+      };
+    }
+
+    console.log(trace(o, 'age'));
+
+
+
+
+    // bind
+    function ff(y) { return this.x + y }
+    var oo = { x: 1 };
+    var g = ff.bind(oo);
+    console.log(g);
+    console.log(g(2));
+
+
+    function bind(f, o) {
+      if (f.bind) return f.bind(o);
+      else return function() {
+        return f.apply(o, arguments);
+      }
+    }
+
+    console.log(ff.toString());
+    console.log(typeof ff.toString()); // string
+
+    // 因为toString是javascript的内置函数，所以返回结果是function toString() { [native code] }
+    console.log(ff.toString.toString());
+
+    var fff = new Function("x", "y", "return x*y;");
+    console.log(fff);
+    console.log(fff(2,3));
+
+
+    var scope = "global";
+    function constructFunction() {
+      var scope = "local";
+      return new Function("return scope");
+    }
+    // Function构造函数并不使用词法作用域，相反，函数体代码的编译总是会在顶层函数
+    // 执行
+    console.log(constructFunction()()); // global
+
+
+    // 下面这个函数会检测一个对象是不是真正的函数对象(并具有函数方法)
+    function isFunction(x) {
+      return Object.prototype.toString.call(x) === "[object Function]";
+    }
+
+    console.log(isFunction(fff)); // true
+    console.log(isFunction(ff)); // true
+
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
