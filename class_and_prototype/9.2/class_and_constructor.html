@@ -1,0 +1,147 @@
+<!-- 类和构造函数 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+
+    // compare the following example with the example in 9.1. The following
+    // example uses constructor to define class
+    function Range(from, to) {
+      this.from = from;
+      this.to = to;
+    }
+
+    Range.prototype = {
+      includes: function(x) {
+        return this.from <= x && x <= this.to;
+      },
+      foreach: function(f) {
+        for (var x = Math.ceil(this.from); x <= this.to; x++)
+          f(x);
+      },
+      toString: function() {
+        return "(" + this.from + "..." + this.to + ")";
+      }
+    };
+
+    var r = new Range(1, 3);
+    console.log(r);
+    
+    console.log(r.constructor); // function Object() { [native code] }
+    console.log(r.constructor === Range); // false
+    
+    console.log(r.includes(2));
+    
+    r.foreach(function(x) {
+      return console.log(x)
+    });
+
+    console.log(r.toString());
+
+    // 如果两个对象是继承自同一个原型对象，那么它们属于同一个类。有的时候两个不同的
+    // 构造函数也可能指向同一个原型对象，所以构造函数不能作为类的标识，原型对象才是。
+    // instanceof运算符不会检查对象是不是由这个构造函数初始化而来，而会检查是否继承
+    // 自原型对象
+    console.log(r instanceof Range); // true
+
+
+    function Test(from, to, middle) {
+      this.from = from;
+      this.to = to;
+      this.middle = middle;
+    }
+
+    Test.prototype = Range.prototype;
+
+    var test = new Test;
+    console.log(test instanceof Range); // true
+    console.log(test instanceof Test);  // true
+    console.log(test.constructor);
+
+
+
+
+    // constructor属性
+    var F = function() {};
+    var p = F.prototype;
+    var c = p.constructor;
+    console.log(c === F); // true  对于任意函数 F.prototype.constructor == F
+
+
+    var o =  new F();
+    console.log(o.constructor);
+    console.log(o.constructor === F); // true
+
+
+
+    // 因为上面定义的Range类使用它自身的一个新对象重写预定义的Range.prototype
+    // 对象。这个新定义的原型对象不包含constructor属性。因此Range类的实例也不包含
+    // constructor属性。
+    // 所以下面显示的给原型添加了一个构造函数
+    Range.prototype = {
+      constructor: Range,
+      includes: function(x) {
+        return this.from <= x && x <= this.to;
+      },
+      foreach: function(f) {
+        for (var x = Math.ceil(this.from); x <= this.to; x++)
+          f(x);
+      },
+      toString: function() {
+        return "(" + this.from + "..." + this.to + ")";
+      }
+    };
+
+    var rr = new Range(1, 10);
+    console.log(rr.constructor);
+    console.log(rr.constructor === Range); // true
+
+
+    // 另外一种解决方案是扩展Range.prototype对象，而不是重写它。例如：
+    // Range.prototype.includes = function() {...};
+
+
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
