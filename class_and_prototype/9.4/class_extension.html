@@ -1,0 +1,82 @@
+<!-- 类的扩充 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    console.log(Function.prototype);
+    console.log(Number.prototype);
+    console.log(String.prototype);
+
+    Number.prototype.times = function(f, context) {
+      var n = Number(this);
+      for(var i = 0; i < n; i++)
+        f.call(context, i);
+    };
+
+    console.log(Number.prototype);
+
+    var n = 3;
+    n.times(function(n) {
+      console.log( n + " hello");
+    });
+
+    String.prototype.trim = String.prototype.trim || function() {
+      if (!this) return this;
+      return this.replace(/^\s+|\s+$/g, "");
+    };
+
+    console.log(String.prototype);
+
+    var s = "It is a string    ";
+    console.log(s.trim() + "trimmed");
+    console.log(s + "trimmed");
+
+    Function.prototype.getName = function() {
+      return this.name || this.toString().match(/function\s*([^() *]\(/)[1];
+    };
+    console.log(Function.prototype);
+
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
