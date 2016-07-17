@@ -1,0 +1,153 @@
+<!-- Javascript中的Java式的类继承 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+
+  function extend(o, p) {
+    for(prop in p) {
+      o[prop] = p[prop];
+    }
+    return o;
+  }
+
+  function defineClass(constructor, methods, statics) {
+    if(methods)
+      extend(constructor.prototype, methods);
+    if(statics)
+      extend(constructor, statics);
+
+    return constructor
+  }
+
+  var SimpleRange = defineClass(function(f,t) {
+    this.f = f;
+    this.t = t;
+  }, {
+    includes: function(x) {
+        return this.from <= x && x <= this.to;
+    },
+    toString: function() {
+        return "(" + this.from + "..." + this.to + ")";
+    }
+  },
+  { upto: function(t) {
+    return new SimpleRange(0, t);
+  } }
+  );
+
+  console.log(SimpleRange);
+
+
+
+
+  // 定义Complex类
+  // 下面是个构造函数，定义了实例字段r,i
+  function Complex(real, imaginary) {
+    if(isNaN(real) || isNaN(imaginary))
+      throw new TypeError();
+
+    this.r = real;
+    this.i = imaginary;
+  }
+
+  // 下面是一系列实例方法。类的实例方法定义为原型对象的函数值属性
+  // 这里定义的实例方法能被所有的实例继承
+  Complex.prototype.add = function(that) {
+    return new Complex(this.r + that.r, this.i + that.i);
+  };
+
+  Complex.prototype.mul = function(that) {
+    return new Complex(this.r * that.r - this.i * that.i, 
+      this.r * that.i + this.i + that.r);
+  };
+
+  Complex.prototype.mag = function() {
+    return Math.sqrt(this.r * this.r + this.i * this.i);
+  };
+
+  Complex.prototype.neg = function() {
+    return new Complex(-this.r, -this.i);
+  };
+
+  Complex.prototype.toString = function() {
+    return "{" + this.r + "," + this.i + "}";
+  };
+
+  Complex.prototype.equals = function(that) {
+    return that != null && that.constructor === Complex &&
+    this.r === that.r && this.i === that.i;
+  };
+
+  // 类字段和类方法直接定义为构造函数的属性
+  // 下面是一系列的类字段
+  Complex.ZERO = new Complex(0, 0);
+  Complex.ONE = new Complex(1, 0);
+  Complex.I = new Complex(0, 1);
+
+  // 类方法
+  Complex.parse = function(s) {
+    try {
+      var m = Complex._format.exec(s);
+      return new Complex(parseFloat(m[1]), parseFloat(m[2]));
+    } catch(x) {
+      throw new TypeError("Can't parse '" + s + "' as a complex number.");
+    }
+  };
+
+  // 下面是类的私有字段
+  // 字段前面的下划线表示它是类内部使用的，不属于类的公有API
+  Complex._format = /^\{([^,] +), ([^}] +)\}$/;
+
+
+  var c = new Complex(2,3);
+  var d = new Complex(c.i, c.r);
+  console.log(c);
+  console.log(d);
+  console.log(c.add(d).toString()); // {5,5}
+
+  // 下面的表达式中用到了类方法和类字段
+  Complex.parse(c.toString()).add(c.neg()).equals(Complex.ZERO);
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
