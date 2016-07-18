@@ -1,0 +1,238 @@
+<!-- 类和类型 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+  function inherit(p) {
+    if (p == null)
+      throw TypeError();
+
+    if (Object.create)
+      return Object.create(p);
+
+    var t = typeof p;
+    if (t !== "object" && t !== "function")
+      throw TypeError();
+
+    function f() {};
+    f.prototype = p;
+    return new f();
+  }
+
+  function range(from, to) {
+    var r = inherit(range.methods);
+    r.from = from;
+    r.to = to;
+    return r;
+  }
+
+  range.methods = {
+    includes: function(x) {
+      return this.from <= x && x <= this.to;
+    },
+    foreach: function(f) {
+      for (var x = Math.ceil(this.from); x <= this.to; x++)
+        f(x);
+    },
+    toString: function() {
+      return "(" + this.from + "..." + this.to + ")";
+    }
+  };
+
+  var r = range(1, 3);
+
+  function Complex(real, imaginary) {
+    if (isNaN(real) || isNaN(imaginary))
+      throw new TypeError();
+
+    this.r = real;
+    this.i = imaginary;
+  }
+
+  // 下面是一系列实例方法。类的实例方法定义为原型对象的函数值属性
+  // 这里定义的实例方法能被所有的实例继承
+  Complex.prototype.add = function(that) {
+    return new Complex(this.r + that.r, this.i + that.i);
+  };
+
+  Complex.prototype.mul = function(that) {
+    return new Complex(this.r * that.r - this.i * that.i,
+      this.r * that.i + this.i + that.r);
+  };
+
+  Complex.prototype.mag = function() {
+    return Math.sqrt(this.r * this.r + this.i * this.i);
+  };
+
+  Complex.prototype.neg = function() {
+    return new Complex(-this.r, -this.i);
+  };
+
+  Complex.prototype.toString = function() {
+    return "{" + this.r + "," + this.i + "}";
+  };
+
+  Complex.prototype.equals = function(that) {
+    return that != null && that.constructor === Complex &&
+      this.r === that.r && this.i === that.i;
+  };
+
+  // 类字段和类方法直接定义为构造函数的属性
+  // 下面是一系列的类字段
+  Complex.ZERO = new Complex(0, 0);
+  Complex.ONE = new Complex(1, 0);
+  Complex.I = new Complex(0, 1);
+
+  // 类方法
+  Complex.parse = function(s) {
+    try {
+      var m = Complex._format.exec(s);
+      return new Complex(parseFloat(m[1]), parseFloat(m[2]));
+    } catch (x) {
+      throw new TypeError("Can't parse '" + s + "' as a complex number.");
+    }
+  };
+
+  // 下面是类的私有字段
+  // 字段前面的下划线表示它是类内部使用的，不属于类的公有API
+  Complex._format = /^\{([^,] +), ([^}] +)\}$/;
+
+  // 以上代码copy自之前的文件
+
+
+
+
+
+
+
+
+  console.log(range.methods.isPrototypeOf(r)); // true
+
+
+  function typeAndValue(x) {
+    if (x == null)
+      return ""; // null和undefined没有构造函数
+    switch (x.constructor) {
+      case Number:
+        return "Number: " + x;
+      case String:
+        return "String: '" + x + "'";
+      case Date:
+        return "Date: " + x;
+      case RegExp:
+        return "Regexp: " + x;
+      case Complex:
+        return "Complex: " + x;
+    }
+  }
+
+  console.log(typeAndValue(910821));
+  console.log(typeAndValue(function() {
+    return "ok";
+  })); // undefined
+
+  var c = new Complex(2, -1);
+
+  console.log(typeAndValue(c)); // Complex: {2,-1}
+
+
+  var f = new Function();
+  console.log(f); // function anonymous() {};
+  console.log(f.constructor); // function Function() { [native code] }
+
+  var s = new String("ok");
+  console.log(s);
+  console.log(s.constructor);
+
+
+  function ff() {
+    return "Function Name";
+  }
+  console.log(ff.name); // ff
+
+  console.log(function() {
+    return "anonymous function";
+  }.name); // 在console中显示的是空白
+
+
+
+  function type(o) {
+    var t, c, n;
+    if (o === null)
+      return "null";
+
+    if (o !== o) // NaN和它自身不相等
+      return "nan"
+
+    if ((t = typeof o) !== "object")
+      return t;
+
+    if ((c = classof(o)) !== "Object")
+      return c;
+
+    if (o.constructor && typeof o.constructor === "function" && 
+      (n = o.constructor.getName()))
+      return n;
+
+    return "Object";
+  }
+
+  function classof(o) {
+    return Object.prototype.toString.call(o).slice(8,-1);
+  }
+
+  Function.prototype.getName = function() {
+    if ("name" in this)
+      return this.name;
+
+    return this.name = this.toString().match(/function\s*([^() *]\(/)[1];
+  }
+
+  var oo = {
+    a: 1,
+    b: 2
+  }
+
+  console.log(type(oo));
+  console.log(type(null));
+  console.log(type(function() {
+    return "anonymous function";
+  }));
+  console.log(type(function noContent() {
+    return "empty";
+  }));
+
+  console.log(function noContent() {
+    return "empty";
+  }.getName()); // noContent
+
+  console.log(classof(function noContent() {
+    return "empty";
+  })); // function
+
+
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
