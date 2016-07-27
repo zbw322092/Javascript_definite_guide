@@ -1,0 +1,28 @@
+{
+  "name": "javascript_definite_guide",
+  "version": "1.0.0",
+  "description": "javascript definite guide examples",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbw322092/Javascript_definite_guide.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Bowen Zhong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbw322092/Javascript_definite_guide/issues"
+  },
+  "homepage": "https://github.com/zbw322092/Javascript_definite_guide#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}
