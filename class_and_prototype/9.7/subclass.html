@@ -168,6 +168,52 @@ function Set() {
     }
   });
 
+
+
+
+  // 构造函数和方法链
+  function NonNullSet() {
+    Set.apply(this, arguments);
+  }
+
+  NonNullSet.prototype = inherit(Set.prototype);
+  NonNullSet.prototype.constructor = NonNullSet;
+
+  NonNullSet.prototype.add = function() {
+    for(var i = 0; i < arguments.length; i++)
+      if (arguments[i] == null)
+        throw new Error("Can't ass null or undefined to a NonNullSet");
+
+    return Set.prototype.add.apply(this, arguments);
+  };
+
+
+
+  function filteredSetSubclass(superclass, filter) {
+    var constructor = function() {
+      superclass.apply(this, arguments);
+    };
+    var proto = constructor.prototype = inherit(superclass.prototype);
+    proto.constructor = constructor;
+    proto.add = function() {
+      for (var i = 0; i < arguments.length; i++) {
+        var v = arguments[i];
+        if (!filter(v))
+          throw ("value" + v + " rejected by filter");
+      }
+      superclass.prototype.add.apply(this, arguments);
+    };
+    return constructor;
+  }
+
+  var StringSet = filteredSetSubclass(Set, function(x) {
+    return typeof x === "string";
+  });
+
+  var MySet = filteredSetSubclass(NonNullSet, function(x) {
+    return typeof x !== "function";
+  });
+
   </script>
 </body>
 
