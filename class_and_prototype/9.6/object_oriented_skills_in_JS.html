@@ -482,16 +482,51 @@
     }
   }
 
-  var zz = new RangeV(1,5);
+  var zz = new RangeV(1, 5);
   console.log(zz);
   console.log(zz.constructor);
   console.log(zz.prototype);
   console.log(zz.includes);
   console.log(zz.includes(2));
+
+
+
+
+  // 构造函数的重载和工厂方法
+  function isArrayLike(o) {
+    if (o &&
+      typeof o === "object" &&
+      isFinite(o.length) &&
+      o.length >= 0 &&
+      o.length === Math.floor(o.length) &&
+      o.length < 4294967296)
+      return true;
+    else
+      return false;
+  }
+
+
+  var SetV() {
+    this.values = {};
+    this.n = 0;
+
+    if (arguments.length == 1 && isArrayLike(arguments[0]))
+      this.add.apply(this, arguments[0]);
+    else if (arguments.length > 0)
+      this.add.apply(this, arguments);
+  }
   </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
 
 
 
