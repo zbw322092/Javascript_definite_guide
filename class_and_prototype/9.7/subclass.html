@@ -1,0 +1,201 @@
+<!-- 子类 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+  // 定义子类
+  //下面是一些已经定义过的内容，copy过来
+  
+  function inherit(p) {
+    if (p == null)
+      throw TypeError();
+
+    if (Object.create)
+      return Object.create(p);
+
+    var t = typeof p;
+    if (t !== "object" && t !== "function")
+      throw TypeError();
+
+    function f() {};
+    f.prototype = p;
+    return new f();
+  }
+
+  function extend(o, p) {
+    for(prop in p) {
+      o[prop] = p[prop];
+    }
+    return o;
+  }  
+
+
+
+function Set() {
+    this.values = {};
+    this.n = 0;
+    this.add.apply(this, arguments);
+  }
+
+  Set.prototype.add = function() {
+    for (var i = 0; i < arguments.length; i++) {
+      var val = arguments[i];
+      var str = Set._v2s(val);
+      if (!this.values.hasOwnProperty(str)) {
+        this.values[str] = val;
+        this.n++;
+      }
+    }
+    return this;
+  };
+
+  Set.prototype.remove = function() {
+    for (var i = 0; i < arguments.length; i++) {
+      var str = Set._v2s(arguments[i]);
+      if (this.values.hasOwnProperty(str)) {
+        delete this.values[str];
+        this.n--;
+      }
+    }
+    return this;
+  };
+
+  Set.prototype.contains = function(value) {
+    return this.values.hasOwnProperty(Set._v2s(value));
+  };
+
+  Set.prototype.size = function() {
+    return this.n;
+  }
+
+  Set.prototype.foreach = function(f, context) {
+    for (var s in this.values)
+      if (this.values.hasOwnProperty(s))
+        f.call(context, this.values[s]);
+  };
+
+  Set._v2s = function(val) {
+    switch (val) {
+      case undefined:
+        return 'u';
+
+      case null:
+        return 'n';
+
+      case true:
+        return 't';
+
+      case false:
+        return 'f';
+
+      default:
+        switch (typeof val) {
+          case 'number':
+            return '#' + val;
+
+          case 'string':
+            return '"' + val;
+
+          default:
+            return '@' + objectId(val);
+        }
+    }
+
+    function objectId(o) {
+      var prop = "|**objectId**|";
+
+      if (!o.hasOwnProperty(prop))
+        o[prop] = Set._v2s.next++;
+
+      return o[prop];
+    }
+  };
+
+  Set._v2s.next = 100;  
+
+
+
+
+  function defineSubclass(superclass, constructor, methods, statics) {
+    constructor.prototype = inherit(superclass.prototype);
+    constructor.prototype.constructor = constructor;
+
+    if (methods) extend(constructor.prototype, methods);
+    if (static) extend(constructor, statics);
+    return constructor;
+  }
+
+  Function.prototype.extend = function(constructor, methods, statics) {
+    return defineSubclass(this, constructor, methods, statics);
+  };
+
+  function SingletonSet(member) {
+    this.member = member;
+  }
+
+  var m = new SingletonSet('Bowen');
+  console.log(m);
+  console.log(typeof m); // object
+  console.log(m.member); // Bowen
+
+  console.log(Set);
+  console.log(Set.constructor);
+  console.log(Set.prototype);
+  console.log(Set.prototype.constructor);
+  console.log(Set.prototype.constructor === Set); // true
+
+  SingletonSet.prototype = inherit(Set.prototype);
+  console.log(SingletonSet);
+  console.log(SingletonSet.prototype);
+
+  extend(SingletonSet.prototype, {
+    constructor: SingletonSet,
+    add: function() {
+      throw "read-only set";
+    },
+    remove: function() {
+      throw "read-only set";
+    },
+    size: function() {
+      return 1;
+    },
+    foreach: function(f, context) {
+      f.call(context, this.member);
+    },
+    contains: function(x) {
+      return x === this.member;
+    }
+  });
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
