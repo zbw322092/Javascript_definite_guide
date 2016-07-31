@@ -382,19 +382,75 @@
 
 
 
-    ranges.sort(function(a,b) {
-      return a.compareTo(b);
-    });
+    // ranges.sort(function(a,b) {
+    //   return a.compareTo(b);
+    // });
 
 
     Range.byLowerBound = function(a,b) {
       return a.compareTo(b);
     }
 
-    ranges.sort(Range.byLowerBound);
+    // ranges.sort(Range.byLowerBound);
 
 
 
+
+    // 方法借用
+    var generic = {
+      toString: function() {
+        var s = '[';
+        if (this.constructor && this.constructor.name)
+          s += this.constructor.name + ": ";
+
+        var n = 0;
+        for (var name in this) {
+          if (!this.hasOwnProperty(name))
+            continue;
+
+          var value = this[name];
+          if (typeof value === "function")
+            continue;
+
+          if (n++)
+            s += ", ";
+
+          s += name + '=' + value;
+        }
+        return s + ']';
+      },
+
+      equals: function(that) {
+        if (that == null)
+          return false;
+
+        if (this.constructor !== that.constructor)
+          return false;
+
+        for (var name in this) {
+          if (name === "|**objectid**|")
+            continue;
+
+          if (!this.hasOwnProperty(name))
+            continue;
+
+          if (this[name] !== that[name])
+            return false;
+        }
+        return true;
+      }
+    };
+
+    console.log(Range.prototype);
+    // console.log(Range.prototype.equals);
+
+    var z = function() {};
+    console.log(z);
+    console.log(z.constructor);
+    console.log(z.prototype);
+
+    z.prototype.equals = generic.equals;
+    console.log(z.prototype);
     
 
 
