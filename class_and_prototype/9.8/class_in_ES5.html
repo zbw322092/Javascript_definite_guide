@@ -1,0 +1,70 @@
+<!-- ECMAScript 5中的类 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    (function() {
+      Object.defineProperty(Object.prototype, "objectId", {
+        get: idGetter,
+        enumerable: false,
+        configurable: false,
+      });
+
+      function idGetter() {
+        if(!(idprop in this)) {
+          if(!Object.isExtensible(this))
+            throw Error("Can't define id for nonextensible objects");
+
+          Object.defineProperty(this, idprop, {
+            value: nextid++,
+            writable: false,
+            enumerable: false,
+            configurable: false
+          });
+        }
+        return this[idprop];
+      };
+      var idprop = "|**objectId**|";
+      var nextid = 1;
+    }());
+
+    var o = new Object();
+    var oo = new Object();
+
+    console.log(o.objectId); // 1
+    console.log(oo.objectId); // 2
+
+
+    
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
