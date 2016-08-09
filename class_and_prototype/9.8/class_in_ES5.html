@@ -126,7 +126,7 @@
   }
 
 
-  function Range(from, to) {
+  function Range2(from, to) {
     if (from > to)
       throw new Error("Range: from must be <= to");
     function getFrom() { return from; }
@@ -155,6 +155,24 @@
       }
     });
   }
+
+  var r2 = new Range2(1, 20);
+  console.log(r2);
+  console.log(r2.from);
+  r2.from = 10;
+  console.log(r2.from); // 10
+
+
+  var original_sort_method = Array.prototype.sort;
+  console.log(original_sort_method);
+
+  Array.prototype.sort =  function() {
+    var start = new Date();
+    original_sort_method.apply(this, arguments);
+    var end = new Date();
+    console.log("Array sort took " + (end - start) + " milliseconds");
+  };
+  console.log(original_sort_method);
 
 
   </script>
