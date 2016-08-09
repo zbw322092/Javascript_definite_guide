@@ -125,7 +125,7 @@
     return o;
   }
 
-
+  // 封装对象状态
   function Range2(from, to) {
     if (from > to)
       throw new Error("Range: from must be <= to");
@@ -163,6 +163,8 @@
   console.log(r2.from); // 10
 
 
+
+  // 防止类的扩展
   var original_sort_method = Array.prototype.sort;
   console.log(original_sort_method);
 
@@ -173,6 +175,48 @@
     console.log("Array sort took " + (end - start) + " milliseconds");
   };
   console.log(original_sort_method);
+
+
+
+  // 子类和ECMAScript 5
+  function StringSet() {
+    this.set = Object.create(null); // 创建不包含原型的对象
+    this.n = 0;
+    this.add.apply(this, arguments);
+  }
+
+  StringSet.prototype = Object.create(AbstractWritableSet.prototype, {
+    constructor: { value: StringSet },
+    contains: {
+      value: function(x) {
+        return x in this.set;
+      }
+    },
+    size: {
+      value: function(x) {
+        return this.n
+      }
+    },
+    foreach: {
+      value: function(f, c) {
+        Object.keys(this.set).foreach(f, c);
+      }
+    },
+    add: {
+      value: function() {
+        for (var i = 0; i < arguments.length; i++) {
+          if (!(arguments[i] in this.set)) {
+            this.set[arguments[i]] = true;
+            this.n++;
+          }
+        }
+        return this;
+      }
+    }
+  });
+
+
+
 
 
   </script>
