@@ -4,43 +4,171 @@
 
 <body>
   <script>
-    (function() {
-      Object.defineProperty(Object.prototype, "objectId", {
-        get: idGetter,
-        enumerable: false,
-        configurable: false,
+  // 让属性不可枚举
+  (function() {
+    Object.defineProperty(Object.prototype, "objectId", {
+      get: idGetter,
+      enumerable: false,
+      configurable: false,
+    });
+
+    function idGetter() {
+      if (!(idprop in this)) {
+        if (!Object.isExtensible(this))
+          throw Error("Can't define id for nonextensible objects");
+
+        Object.defineProperty(this, idprop, {
+          value: nextid++,
+          writable: false,
+          enumerable: false,
+          configurable: false
+        });
+      }
+      return this[idprop];
+    };
+    var idprop = "|**objectId**|";
+    var nextid = 1;
+  }());
+
+  var o = new Object();
+  var oo = new Object();
+
+  console.log(o.objectId); // 1
+  console.log(oo.objectId); // 2
+
+
+
+  // 定义不可变的类
+  function Range(from, to) {
+    var props = {
+      from: {
+        value: from,
+        enumerable: true,
+        writable: false,
+        configurable: false
+      },
+
+      to: {
+        value: to,
+        enumerable: true,
+        writable: false,
+        configurable: false
+      }
+    };
+
+    if (this instanceof Range)
+      Object.defineProperties(this, props);
+    else
+      return Object.create(Range.prototype, props);
+  }
+
+  Object.defineProperties(Range.prototype, {
+    includes: {
+      value: function(x) {
+        return this.from <= x && x <= this.to;
+      }
+    },
+    foreach: {
+      value: function(f) {
+        for (var x = Math.ceil(this.from); x <= this.to; x++)
+          f(x);
+      }
+    },
+    toString: {
+      value: function() {
+        return "(" + this.from + "..." + this.to + ")";
+      }
+    }
+  });
+
+  var r = new Range(1, 10);
+  console.log(r);
+  console.log(r.to); // 10
+
+  r.to = 100;
+  console.log(r.to); // still 10
+
+  console.log(r.includes);
+  console.log(r.includes(20)); // false
+
+  console.log(r.toString()); // (1...10)
+
+  var rr = Range(10, 100);
+  console.log(rr); // 一样可以成功的创建object
+
+
+  function freezeProps(o) {
+    var props = (arguments.length == 1) ? Object.getOwnPropertyNames(o) : Array.prototype.splice.call(arguments, 1);
+
+    props.forEach(function(n) {
+      if(!Object.getOwnPropertyDescriptor(o, n).configurable)
+        return;
+      Object.defineProperty(o, n, {
+        writable: false,
+        configurable: false
       });
+    });
+    return o;
+  }
 
-      function idGetter() {
-        if(!(idprop in this)) {
-          if(!Object.isExtensible(this))
-            throw Error("Can't define id for nonextensible objects");
+  function hideProps(o) {
+    var props = (arguments.length == 1) ? Object.getOwnPropertyNames(o) : Array.prototype.splice.call(arguments, 1);
 
-          Object.defineProperty(this, idprop, {
-            value: nextid++,
-            writable: false,
-            enumerable: false,
-            configurable: false
-          });
-        }
-        return this[idprop];
-      };
-      var idprop = "|**objectId**|";
-      var nextid = 1;
-    }());
+    props.forEach(function(n) {
+      if (!Object.getOwnPropertyDescriptor(o, n).configurable)
+        return;
 
-    var o = new Object();
-    var oo = new Object();
-
-    console.log(o.objectId); // 1
-    console.log(oo.objectId); // 2
+      Object.defineProperty(o, n, {
+        enumerable: false
+      });
+    });
+    return o;
+  }
 
 
-    
+  function Range(from, to) {
+    if (from > to)
+      throw new Error("Range: from must be <= to");
+    function getFrom() { return from; }
+    function getTo() { return to; }
+    function setFrom(f) {
+      if(f <= to) from = f;
+      else throw new Error("Range: from must be <= to");
+    }
+    function setTo(t) {
+      if (t >= from) to = t;
+      else throw new Error("Range: to must be >= from");
+    }
+
+    Object.defineProperties(this, {
+      from: {
+        get: getFrom,
+        set: setFrom,
+        enumerable: true,
+        configurable: false
+      },
+      to: {
+        get: getTo,
+        set: setTo,
+        enumerable: true,
+        configurable: false
+      }
+    });
+  }
+
+
   </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
 
 
 
