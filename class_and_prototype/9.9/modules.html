@@ -1,0 +1,116 @@
+<!-- 模块 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+  // 作为私有命名空间的函数
+  // 以下模块的公有API是Set()构造函数，我们通过返回这个构造函数来导出它
+  var Set = (function invacation() {
+    function Set() {
+      this.values = {};
+      this.n = 0;
+      this.add.apply(this, arguments);
+    }
+
+    Set.prototype.contains = function(value) {
+      return this.values.hasOwnProperty(v2s(value));
+    };
+    Set.prototype.size = function() {
+      return this.n;
+    };
+
+    function v2s(val) {
+      return val;
+    }
+
+    return Set;
+
+  }());
+
+  console.log(Set);
+
+  // 创建一个全局变量用来存放集合相关的模块
+  var collections;
+  if (!collections) collections = {};
+  collections.sets = (function namespace() {
+    return {
+      AbstractSet: 'AbstractSet',
+      NotSet: 'NotSet',
+      AbstractEnumerableSet: 'AbstractEnumerableSet'
+    };
+  }());
+
+  console.log(collections);
+  console.log(collections.sets);
+
+
+  // 另外一种技术，将模块函数当成构造函数来调用，通过将他们赋值给this来将其导出
+  var collections2;
+  if (!collections2) collections2 = {};
+  collections2.sets = (new function namespace() {
+    this.AbstractSet = 'AbstractSet';
+    this.NotSet = 'NotSet';
+    this.AbstractEnumerableSet = 'AbstractEnumerableSet'
+    console.log(this);
+  }());
+
+  console.log(collections2);
+
+
+  // 另一种解决方案
+  // 先设置全局命名空间对象，然后在后面的函数中之间定义命名空间对象中的属性，
+  // 这样就不用return了
+  var collections3 = {};
+  if (!collections3) collections3 = {};
+  collections3.sets = {};
+  (function namespace() {
+    collections3.sets.AbstractSet = 'AbstractSet';
+    collections3.sets.NotSet = 'NotSet';
+  }());
+
+  console.log(collections3);
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
