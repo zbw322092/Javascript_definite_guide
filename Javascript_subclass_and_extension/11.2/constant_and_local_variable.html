@@ -4,76 +4,67 @@
 
 <body>
   <script>
-    
-    const pi = 3.14;
-    // pi = 10; // Uncaught TypeError: Assignment to constant variable.
-    console.log(pi);
+  const pi = 3.14;
+  // pi = 10; // Uncaught TypeError: Assignment to constant variable.
+  console.log(pi);
 
-    // const pi = 10; // Uncaught SyntaxError: Identifier 'pi' has already been declared
-    
-    // var pi = 10; // 和上面一样会报错
-    
+  // const pi = 10; // Uncaught SyntaxError: Identifier 'pi' has already been declared
 
-    function oddsums(n) {
-      let total = 0, result = [];
-      for (let x = 1; x <= n; x++) {
-        let odd = 2*x -1;
-        total += odd;
-        result.push(total);
-      }
-      // console.log(x); // Uncaught ReferenceError: x is not defined
-      return result;
+  // var pi = 10; // 和上面一样会报错
+
+
+  function oddsums(n) {
+    let total = 0,
+      result = [];
+    for (let x = 1; x <= n; x++) {
+      let odd = 2 * x - 1;
+      total += odd;
+      result.push(total);
     }
+    // console.log(x); // Uncaught ReferenceError: x is not defined
+    return result;
+  }
 
-    console.log(oddsums(5));
-
-
-    var o = {
-      x: 1,
-      y: 2
-    };
-
-    for (let p in o) {
-      console.log(p);
-    }
-    // console.log(p); // 报错
-    
-
-    // let x = 1;
-    // for(let x = x + 1; x < 5; x++)
-    //   console.log(x);
-
-    // {
-    //   let x = x + 1;
-    //   console.log(x);
-    // }
-
-    // let x = 1, y = 2;
-    // console.log(
-    //   let(x = x+1, y = x+2) x+y
-    // );
+  console.log(oddsums(5));
 
 
+  var o = {
+    x: 1,
+    y: 2
+  };
+
+  for (let p in o) {
+    console.log(p);
+  }
+  // console.log(p); // 报错
+
+
+  // let x = 1;
+  // for(let x = x + 1; x < 5; x++)
+  //   console.log(x);
+
+  // {
+  //   let x = x + 1;
+  //   console.log(x);
+  // }
+
+  // let x = 1, y = 2;
+  // console.log(
+  //   let(x = x+1, y = x+2) x+y
+  // );
+
+
+  // 如果a通过var来初始化，这里会显示uhndefined, 而如果a是一个function的话，这里可以正常显示。
+  console.log(a);
+
+  // var a = 1;
+  function a() {
+    return "it is here";
+  }
   </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
