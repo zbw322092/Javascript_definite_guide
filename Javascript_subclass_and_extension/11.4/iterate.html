@@ -1,0 +1,60 @@
+<!-- 迭代 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    function counter(start) {
+      let nextValue = Math.round(start);
+      return {
+        next: function() {
+          return nextValue++
+        }
+      };
+    }
+
+    let serialNumberGenerator = counter(1000);
+    console.log(serialNumberGenerator.next()); // 1000
+    console.log(serialNumberGenerator.next()); // 1001
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
