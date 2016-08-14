@@ -1,0 +1,107 @@
+<!-- 客户端Javascript -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <style type="text/css">
+    .reveal * {
+      display: none;
+    }
+
+    .reveal * .handle {
+      display: block;
+    }
+  </style>
+  <div id="time">It is TIME</div>
+
+  <div class="reveal">
+    <h1 class="handle">Click Here to Reveal Hidden Text</h1>
+    <p>This paragraph is hidden. It appears when you click on the title.</p>
+  </div>
+
+  <script>
+    console.log(window);
+    console.log(window.location);
+
+    // window.location = "http://www.google.co.uk/";
+    
+    // window.setTimeout(function() {
+    //   window.alert("Hello World");
+    // }, 2000);
+    
+
+    console.log(window.document);
+
+    var timeElement = document.getElementById('time');
+    console.log(timeElement);
+
+    console.log(timeElement.style);
+    timeElement.style.backgroundColor = "yellow";
+
+    console.log(timeElement.style.border);
+
+    console.log(Element);
+
+    timeElement.onclick = function() {
+      this.innerHTML = new Date().toString();
+    }
+
+
+    window.onload = function() {
+      var elements = document.getElementsByClassName('reveal');
+      
+      console.log(typeof elements);
+      
+      for (var i = 0; i < elements.length; i++) {
+        var elt = elements[i];
+        var title = elt.getElementsByClassName("handle")[0];
+        addRevealHandler(title, elt);
+      }
+
+      function addRevealHandler(title, elt) {
+        title.onclick = function() {
+          if (elt.className == "reveal")
+            elt.className = "revealed";
+          else if (elt.className == "revealed")
+            elt.className = "reveal";
+        }
+      }
+    };
+
+
+    console.log(typeof Window); // function
+
+    // the following codes can give parts of explanation why js is an Object-oriented language
+    console.log(typeof window); // object
+    console.log(typeof document); // object
+    console.log(typeof timeElement); // object
+    console.log(typeof timeElement.style); // object
+    console.log(typeof timeElement.style.backgroundColor); // string
+
+
+    
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
