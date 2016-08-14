@@ -1,0 +1,40 @@
+<!-- 在HTML里嵌入Javascript -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <!-- 下面这段代码在firefox和chrome上面的效果是不一样的，firefox中会执行
+  URL里面的代码，并返回代码的执行结果作为新文档的内容，浏览器会擦除当前文档并显示
+  新的文档 -->
+  <a href="javascript: new Date().toLocaleTimeString();">
+    What time is it?
+  </a>
+  <br>
+
+  <a href="javascript: alert('hi there')">Click to show alert</a>
+  <br>
+
+  <a href="javascript: window.open('about:blank');">Open a new tab</a>
+  <br>
+
+  <a href="void javascript: window.open('about:blank');">Open a new tab</a>
+  <br>
+  
+  <!-- 书签 -->
+  <a href='javascript: var e = "", r = "";
+  do {
+  e = prompt("Expression: " + e + "\n" + r + "\n", e);
+  try  {
+    r = "Result: "   + eval(e);
+  }
+  catch(ex) {
+    r = ex;
+  }
+  }while(e);
+  void 0;
+  '> Javascript Evaluator</a>
+  <script>
+  </script>
+</body>
+
+</html>
