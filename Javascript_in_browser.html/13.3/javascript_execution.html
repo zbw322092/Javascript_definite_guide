@@ -15,6 +15,22 @@
     // 如下，在<script>标签中放入alert语句，在打开页面的时候会先显示弹框，再弹框消失
     // 之后再显示HTML中其他页面的渲染。
     // window.alert("Hello World");
+    
+
+    function onLoad(f) {
+      if (onLoad.loaded)
+        window.setTimeout(f, 0);
+      else if (window.addEventListener)
+        window.addEventListener("load", f, false);
+      else if (window.attachEvent)
+        window.attachEvent("onload", f);
+    }
+
+    onLoad.loaded = false;
+    onLoad(function() {
+      onLoad.loaded = true;
+    });
+
   </script>
 
 </body>
