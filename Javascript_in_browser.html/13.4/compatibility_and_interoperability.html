@@ -1,0 +1,31 @@
+<!-- 兼容性和互用性 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <!-- [if IE 6]>
+    this paragraph will show in IE 6
+  <![endif] -->
+
+  <!-- [if lte IE 7] >
+    this paragraph will show in IE whose version less that 7
+  <![endif]  -->
+
+  <!-- [if !IE] ><-->
+    This paragraph will show in the browsers except IE.
+  <!--><![endif]  -->
+
+  <script>
+     /* @cc_on
+        @if (@_jscript)
+          alert('You are using IE browser');
+        @else*/
+          alert('You are not using IE browser');
+    /* @end
+     @*/
+  </script>
+
+</body>
+
+</html>
