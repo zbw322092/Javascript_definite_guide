@@ -1,0 +1,22 @@
+<!-- Javascript程序的执行 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h1>It is a TITLE</h1>
+
+  <!-- 如果这个script文件是通过连接来引入的，就不会出现下面例子中出现的现象，
+  会先显示<h1></h1>中的内容，在alert。但是如果将<h1></h1>放在这个脚本引入的后面，
+  就会先引入脚本，执行alert，再显示<h1></h1> -->
+  <script type="text/javascript" src="script.js"></script>
+
+  <script>
+    // HTML解析器遇到<script>元素的时候，它默认必须先执行脚本，再恢复文档的解析和渲染
+    // 如下，在<script>标签中放入alert语句，在打开页面的时候会先显示弹框，再弹框消失
+    // 之后再显示HTML中其他页面的渲染。
+    // window.alert("Hello World");
+  </script>
+
+</body>
+
+</html>
