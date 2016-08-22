@@ -37,7 +37,8 @@ module.exports = function(grunt) {
 			foo: [1,2,3],
 			bar: 'hello world',
 			baz: false
-		}
+		},
+
 
 		// qunit: {
 		// 	files: ['test/**/*.html']
