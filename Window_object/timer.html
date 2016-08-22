@@ -1,0 +1,22 @@
+<!-- 计时器 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <button onclick="stopLog()">Stop log</button>
+  <script>
+    var logInterval = setInterval(function() { 
+      console.log('it is time to log')
+    }, 1000);
+
+    function stopLog() {
+      clearInterval(logInterval);
+    }
+
+    
+
+  </script>
+
+</body>
+
+</html>
