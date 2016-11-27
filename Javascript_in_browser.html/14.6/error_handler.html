@@ -1,0 +1,21 @@
+<!-- 错误处理 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <script>
+    window.onerror = function(msg, url, line) {
+      if (onerror.num++ < onerror.max) {
+        alert('ERROR: ' + msg + "\n" + url + ":" + line);
+        return true;
+      }
+    }
+
+    onerror.max = 3;
+    onerror.num = 0;
+  </script>
+
+</body>
+
+</html>
