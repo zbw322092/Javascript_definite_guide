@@ -5,19 +5,49 @@
 <body>
 
   <p>here</p>
+  <iframe src="http://cn.bing.com/search?q=iframe&go=%E6%8F%90%E4%BA%A4&qs=n&form=QBLH&pq=iframe&sc=8-6&sp=-1&sk=&cvid=09D5DE6C750B4DA69A35D3561A86F2AB" height="300px" width="500px" id="f1">
+  </iframe>
 
   <script>
-    var w = window.open('iframe.html', 'iframe', 'width=400, height=350, status=yes, resizable=no');
+    // var w = window.open('iframe.html', 'iframe', 'width=400, height=350, status=yes, resizable=no');
 
     // 这段代码会在两秒之后关闭之前弹出的窗口
-    setTimeout(function() {
-      w.close();
-    }, 2000);
+    // setTimeout(function() {
+    //   w.close();
+    // }, 2000);
 
     // 这段代码不会关闭之前弹出的窗口
     // setTimeout(function() {
     //   window.close();
     // }, 2000);
+
+    console.log(document);
+    console.log(window);
+
+    var frameDOM = document.getElementById("f1");
+    console.log(frameDOM);
+    
+    // 这个就是窗体的window对象
+    var elt = frameDOM.contentWindow;
+    console.log(elt);
+
+    console.log(elt.frameElement);
+    console.log(elt.frameElement === frameDOM); // true
+
+    console.log(window.frameElement); // null， 因为这是一个顶级窗口
+
+
+
+    // window的frames属性, 指的是自身包含的窗口，或窗体的子窗体
+    console.log(window.frames);
+    console.log(typeof window.frames); // object， 不过是个array-like object
+    console.log(window.frames[0]);
+
+
+    console.log(parent.frames[0] === elt); // true
+    console.log(window[0] === elt); // true
+
+
   </script>
 
 </body>
