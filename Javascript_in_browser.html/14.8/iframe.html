@@ -8,6 +8,10 @@
   <iframe src="http://cn.bing.com/search?q=iframe&go=%E6%8F%90%E4%BA%A4&qs=n&form=QBLH&pq=iframe&sc=8-6&sp=-1&sk=&cvid=09D5DE6C750B4DA69A35D3561A86F2AB" height="300px" width="500px" id="f1">
   </iframe>
 
+  <iframe src="frame1.html"></iframe>
+
+  <iframe src="iframe2.html"></iframe>
+
   <script>
     // var w = window.open('iframe.html', 'iframe', 'width=400, height=350, status=yes, resizable=no');
 
@@ -47,6 +51,7 @@
     console.log(parent.frames[0] === elt); // true
     console.log(window[0] === elt); // true
 
+    console.log(self === parent); // true
 
   </script>
 
