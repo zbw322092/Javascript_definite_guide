@@ -1,0 +1,112 @@
+<!-- 选取文档元素 -->
+<!DOCTYPE html>
+<html>
+
+<p id='one'>Element1</p>
+<div id='two'>Element2
+	<div id='inner'>Inner Element</div>
+</div>
+<h3 id='three'>Element3</h3>
+
+<form name="formName" id="form1">
+	<th>A Form</th>
+	<p>the first form</p>
+</form>
+<form name="formName">
+	<th>A Form</th>
+</form>
+
+<p name="para">test name property</p>
+<p name="para">test name property</p>
+
+<script type="text/javascript">
+	var dom = document.getElementsByTagName('form');
+	console.log(dom);
+	console.log(dom[0].parentNode);
+	console.log(dom.parentNode); // undefined
+	console.log(dom[0].nodeType); //1    Element节点
+
+
+	console.log(dom[0].parentNode === document); // false
+	console.log(document.getElementsByTagName('html'));
+	console.log(document.getElementsByTagName('html').parentNode); // undefined
+
+	console.log(document.getElementsByTagName('html').nodeType);
+
+	console.log(document.parentNode); // null
+	console.log(document);
+	console.log(document.nodeType); // 9 Document节点
+
+
+
+	// 返回e元素的第n层的父元素
+	function parent(e, n) {
+		if(n === undefined) n = 1;
+		while (n-- && e) e = e.parentNode;
+		if (!e || e.nodeType !== 1)
+			return null;
+		return e;
+	}
+
+	var form1 = document.getElementById('form1');
+	console.log(form1.children);
+	console.log(form1.children.length);
+	console.log(form1.childNodes);
+	console.log(form1.firstChild);
+	console.log(form1.childNodes[1]);
+	console.log(typeof form1.childNodes[1]);
+	console.log(form1.childNodes[1] === form1.children); // false
+
+
+
+	console.log(Element);
+	console.log(HTMLDocument);
+	console.log(typeof HTMLDocument); // function
+
+	console.log(Element.prototype);
+	console.log(HTMLDocument.prototype);
+	Element.prototype.next = function() {
+		if (this.nextElementSilbling)
+			return this.nextElementSilbling;
+		var sib = this.nextSilbing;
+		while(sib && sib.nodeType !== 1)
+			sib = sib.nextSilbing;
+
+		return sib;
+	}
+
+
+
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
