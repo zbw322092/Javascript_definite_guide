@@ -1,0 +1,27 @@
+<!-- 选取文档元素 -->
+<!DOCTYPE html>
+<html>
+
+<p id='one'>Element1</p>
+<div id='two'>Element2</div>
+<h3 id='three'>Element3</h3>
+
+<script type="text/javascript">
+	// 可以使用下面这个function来选取多个elements
+	function getElementByIdFunc() {
+		var elements = {};
+		for (var i = 0; i < arguments.length; i++) {
+			var elt = document.getElementById(arguments[i]);
+			if (elt === null) {
+				throw new Error('No element with id: ' + arguments[i]);
+			}
+
+			elements[i] = elt;
+		}
+		return elements
+	}
+
+	console.log(getElementByIdFunc('one', 'two', 'three'));
+</script>
+
+</html>
