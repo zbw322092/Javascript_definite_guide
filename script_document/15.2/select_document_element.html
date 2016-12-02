@@ -6,6 +6,16 @@
 <div id='two'>Element2</div>
 <h3 id='three'>Element3</h3>
 
+<form name="formName">
+	<th>A Form</th>
+</form>
+<form name="formName">
+	<th>A Form</th>
+</form>
+
+<p name="para">test name property</p>
+<p name="para">test name property</p>
+
 <script type="text/javascript">
 	// 可以使用下面这个function来选取多个elements
 	function getElementByIdFunc() {
@@ -22,6 +32,35 @@
 	}
 
 	console.log(getElementByIdFunc('one', 'two', 'three'));
+
+	// 会在document对象上面自动创建name的同名属性
+	console.log(document.formName);
+	console.log(typeof document.formName);
+
+	console.log(document.getElementsByName('para'));
+	console.log(document.para); // undefined
+
+
+	console.log(document.forms);
+	console.log(document.getElementsByTagName('*'));
+
+	console.log(document.head);
+	console.log(document.body);
+	console.log(document.html);
+
+
+	console.log(document.all);
+	console.log(document.all['formName']);
+	// console.log(document.all.tags("p")[1]);
+
+
 </script>
 
 </html>
+
+
+
+
+
+
+
