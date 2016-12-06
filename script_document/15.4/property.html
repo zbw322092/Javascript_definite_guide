@@ -1,45 +1,13 @@
-<!-- 属性 -->
+<!-- 元素的内容 -->
 <!DOCTYPE html>
 <html>
 
 <body>
 	<div id="pic1" onclick="picClick()" style="height: 100px">Pic here</div>
 
-	<span class="sparkline" data-ymin="0" data-ymax="10">
-		111222111
-	</span>
 </body>
 
 <script type="text/javascript">
-	console.log(document.getElementById('pic1'));
-	
-	document.getElementById('pic1').src = "http://www.endlessicons.com/wp-content/uploads/2012/11/apple-icon-614x460.png";
-	console.log(document.getElementById('pic1').src);
-
-	function picClick() {
-		window.alert('here');
-	}
-
-	function setClickFunc() {
-		window.alert('there');
-	}
-
-	console.log(document.getElementById('pic1').onclick);	
-	console.log(typeof document.getElementById('pic1').onclick); // function
-
-	console.log(document.getElementById('pic1').style);
-	console.log(document.getElementById('pic1').style.height);
-
-	console.log(document.getElementById('pic1').getAttribute('onclick'));
-	
-	document.getElementById('pic1').setAttribute('onclick', 'setClickFunc()'); // 注意这里面设置的时候都是以string的形式。
-
-	console.log(document.getElementById('pic1').hasAttribute('onclick')); // true
-
-
-	console.log(document.body.attributes);
-	console.log(document.getElementById('pic1').attributes);
-	console.log(document.getElementById('pic1').attributes['onclick']);
 
 </script>
 

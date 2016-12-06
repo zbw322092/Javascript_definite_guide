@@ -1,0 +1,85 @@
+<!-- 元素的内容 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+	<div id="pic1" onclick="picClick()" style="height: 100px">Pic here</div>
+
+	<span class="sparkline" data-ymin="0" data-ymax="10">
+		111222111
+	</span>
+</body>
+
+<!-- 注意下面，type是text/plain，那么在里面就可以使用尖括号 -->
+<script id="script-tag" type="text/plain">
+	it is the <script> tag
+</script>
+
+<script type="text/javascript">
+
+	var innerHTMLContent = document.getElementById('pic1').innerHTML;
+	console.log(innerHTMLContent);
+
+	var outerHTMLContent = document.getElementById('pic1').outerHTML;
+	console.log(outerHTMLContent);
+
+	// document.getElementById('pic1').outerHTML = '<span>change outerHTML</span>';
+
+	var elt = document.getElementById('pic1');
+	elt.insertAdjacentHTML('beforebegin', '<span>before pic</span>');
+	elt.insertAdjacentHTML('afterBegin', '<span>after pic </span>');
+
+	console.log(elt.innerText); // after pic Pic here
+	console.log(elt.innerHTML); // <span>after pic </span>Pic here
+	console.log(elt.textContent); // after pic Pic here
+
+	function textContent(element, value) {
+		var content = element.textContent;
+		if (value === undefined) {
+			if (content !== undefined)
+				return content;
+			else
+				return element.innerText;
+		} else {
+			if (content !== undefined)
+				element.textContent = value;
+			else
+				element.innerText = value;
+		}
+	}
+
+	// script tag的text属性
+	console.log(document.getElementById('script-tag').text);
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
