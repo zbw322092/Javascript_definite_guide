@@ -1,0 +1,74 @@
+<!-- 创建、插入和删除节点 -->
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+	<span id='new-element'>new element here</span>
+</body>
+
+<script type="text/javascript">
+	function loadasync(url) {
+		var head = document.getElementsByTagName("head")[0];
+		var s = document.createElement("script");
+		s.src = url;
+		head.appendChild(s);
+	}
+
+	loadasync('http://cn.bing.com/');
+
+
+	var newTextNode = document.createTextNode('text node content');
+	console.log(newTextNode);
+
+	var cloneNodeValue = newTextNode.cloneNode();
+	console.log(cloneNodeValue);
+	console.log(cloneNodeValue === newTextNode); // false
+	console.log(cloneNodeValue == newTextNode); // false
+	console.log(cloneNodeValue.textContent === newTextNode.textContent); // true
+
+
+	function insertAt(parent, child, n) {
+		if (n < 0 || n > parent.childNodes.length)
+			throw new Error("invalid index");
+		else if (n == parent.childNodes.length)
+			parent.appendChild(child);
+		else
+			parent.insertBefore(child, parent.childNodes[n]);
+	}
+
+	var bodyElement = document.getElementsByTagName('span')[0];
+	bodyElement.appendChild(document.createElement('span'));
+	console.log(bodyElement);
+	
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
