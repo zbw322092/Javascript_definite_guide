@@ -33,24 +33,39 @@
 	console.log(elt.innerHTML); // <span>after pic </span>Pic here
 	console.log(elt.textContent); // after pic Pic here
 
-	function textContent(element, value) {
-		var content = element.textContent;
-		if (value === undefined) {
-			if (content !== undefined)
-				return content;
-			else
-				return element.innerText;
-		} else {
-			if (content !== undefined)
-				element.textContent = value;
-			else
-				element.innerText = value;
-		}
-	}
+	// function textContent(element, value) {
+	// 	var content = element.textContent;
+	// 	if (value === undefined) {
+	// 		if (content !== undefined)
+	// 			return content;
+	// 		else
+	// 			return element.innerText;
+	// 	} else {
+	// 		if (content !== undefined)
+	// 			element.textContent = value;
+	// 		else
+	// 			element.innerText = value;
+	// 	}
+	// }
 
 	// script tag的text属性
 	console.log(document.getElementById('script-tag').text);
+	console.log(document.getElementById('script-tag').nodeValue); // null
+	console.log(document.getElementById('pic1').nodeValue);
 
+
+	function textContent(e) {
+		var child, type, s = "";
+		for (child = e.firstChild; child != null; child = child.nextSibling) {
+			type = child.nodeType;
+			if (type === 3 || type === 4) {
+				s += child.nodeValue;
+			} else if (type === 1) {
+				s += textContent(child);
+			}
+		}
+		return s;
+	}
 
 
 </script>
