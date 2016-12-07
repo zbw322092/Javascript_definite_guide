@@ -1,0 +1,78 @@
+<!-- 文档和元素的几何形状和滚动 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<span id="span-one">the first span</span><br>
+	<span id="span-two">long lines long lines long lines long lines long lines long lines long lines long lines long lines long lines long lines long lineslong lines long lines long lines long lines long lines long lines long lines long lines</span>
+</body>
+
+<script type="text/javascript">
+	function getScrollOffsets(w) {
+		w = w || window;
+		if (w.pageXOffset != null)
+			return {
+				x: w.pageXOffset,
+				y: w.pageYOffset
+			};
+
+			var d = w.document;
+			if (document.compatMode == 'CSS1Compat')
+				return {
+					x: d.documentElement.scrollLeft,
+					y: d.documentElement.scrollTop
+				};
+
+			return {
+				x: d.body.scrollLeft,
+				y: d.body.scrollTop
+			};
+	}
+
+
+	var spanOne = document.getElementById('span-one');
+	var box = spanOne.getBoundingClientRect();
+	console.log(box);
+	var offsets = getScrollOffsets();
+	var x = box.left + offsets.x;
+	var y = box.top + offsets.y;
+	console.log('x: ', x);
+	console.log('y: ', y);
+
+
+	var spanTwo = document.getElementById('span-two');
+	var boxTwo = spanTwo.getBoundingClientRect();
+	console.log(boxTwo);
+
+	var boxThree = spanTwo.getClientRects();
+	console.log(boxThree);
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
