@@ -1,0 +1,52 @@
+<!-- 查询计算出的样式 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<button onclick="shake(this)">Click to animate</button>
+
+	<p id="computedStyle" style="font-size: 18px">Computed Style</p>
+</body>
+
+<script type="text/javascript">
+	function scale(e, factor) {
+		var size = parseInt(window.getComputedStyle(e, "").fontSize);
+		console.log(size);
+		e.style.fontSize = factor*size + "px";
+	}
+
+	var computedStyle = document.getElementById('computedStyle');
+	scale(computedStyle, 3);
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
