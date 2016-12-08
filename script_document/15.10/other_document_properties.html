@@ -5,6 +5,13 @@
 	<title>
 		other document properties
 	</title>
+
+	<button onclick="documentWrite()">Click to write in document</button>
+	
+	<!-- contenteditable -->
+	<div id="editor" contenteditable spellcheck="false">
+		click to edit
+	</div>
 	
 </body>
 
@@ -30,6 +37,37 @@
 
 
 	document.write("<p>Document title: " + document.title);
+
+	function documentWrite() {
+		document.write("<p>Document write in function</p>");
+	}
+
+
+	function getSelectedText() {
+		if (window.getSelection) {
+			return window.getSelection().toString();
+		} else if (document.selection) {
+			return document.selection.createRange().text;
+		}
+	}
+	getSelectedText();
+
+
+	// execCommand
+	console.log(document.execCommand);
+	function bold(url) {
+		document.execCommand("bold", false, url);
+	}
+
+	function link() {
+		var url = prompt('Enter link destination');
+		if (url) document.execCommand("createlink", false, url);
+	}
+
+	bold('bing.cn');
+	link();
+
+
 </script>
 
 </html>
