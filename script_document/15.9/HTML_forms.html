@@ -1,0 +1,66 @@
+<!-- HTML表单 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<select multiple="multiple" size="2" autofocus>
+		<option value="bowen1">bowen1</option>
+		<option value="bowen2">bowen2</option>
+		<option value="bowen3">bowen3</option>
+		<option value="bowen4">bowen4</option>
+	</select>
+</body>
+
+<script type="text/javascript">
+	var selectElement = document.getElementsByTagName('select');
+	console.log(selectElement);
+	console.log(selectElement[0]);
+	console.log(selectElement[0].type); // select-multiple
+	console.log(selectElement[0].selectedIndex); // -1
+
+	console.log(selectElement[0].getElementsByTagName('option'));
+	console.log(selectElement[0].getElementsByTagName('option')[0].text); // bowen1
+
+	selectElement[0].getElementsByTagName('option')[0].text = 'bowen5';
+
+	console.log(selectElement[0].getElementsByTagName('option').length);
+
+
+	var zaire = new Option(
+		"Zaire",
+		"zaire",
+		false,
+		false
+	);
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
