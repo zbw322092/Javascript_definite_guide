@@ -1,0 +1,68 @@
+<!-- 其他文档属性 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<title>
+		other document properties
+	</title>
+	
+</body>
+
+<script type="text/javascript">
+	console.log(document.cookie);
+	console.log(document.lastModified);
+	console.log(document.referrer);
+	console.log(document.body);
+	console.log(document.title);
+	console.log(document.URL);
+
+	if (document.referrer.indexOf('http://cn.bing.com/search?') == 0) {
+		var args = document.referrer.substring(document.referrer.indexOf('?') + 1).split("&");
+		for (var i = 0; i < args.length; i++) {
+			if (args[i].substring(0,2) == "q=") {
+				document.write("<p>Welcome Bing.");
+				document.write("You search for: ") + 
+					unescape(args[i].substring(2)).replace('+', ' ');
+					break;
+			}
+		}
+	}
+
+
+	document.write("<p>Document title: " + document.title);
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
