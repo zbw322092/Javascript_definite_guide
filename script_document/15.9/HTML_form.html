@@ -1,0 +1,69 @@
+<!-- HTML表单 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<form name="shipping" onreset="return confirm('Really reset?')">
+		<fieldset><legend>Shipping Method</legend>
+			<label><input type="radio" name="method" value="1st">First-class</label>
+			<label><input type="radio" name="method" value="2day">2-day Air</label>
+			<label><input type="radio" name="method" value="overnite">Overnight</label>
+			<label><input type="text" name="text-content" onkeypress="infoInput()">More Info</label>
+		</fieldset>
+		<button type="reset">Reset</button>
+	</form>
+</body>
+
+<script type="text/javascript">
+	var forms = document.forms;
+	console.log(forms);
+
+	var theForm = document.forms.shipping;
+	console.log(theForm);
+
+	var formElements = document.forms.shipping.elements;
+	console.log(formElements);
+	console.log(formElements[0]);
+	console.log(formElements[1]);
+
+	var methods = document.forms.shipping.elements.method;
+	console.log(methods);
+
+	var shipping_method;
+	for (var i = 0; i < methods.length; i++) {
+		if (methods[i].checked) shipping_method = methods[i].value;
+	}
+	console.log(shipping_method);
+
+	function infoInput() {
+		return false;
+	}
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
