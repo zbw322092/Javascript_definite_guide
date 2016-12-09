@@ -2,13 +2,25 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+	<!-- <img src="http://logok.org/wp-content/uploads/2014/04/Apple-logo-grey-880x625.png"
+	onmousedown="if (event.shiftKey) drag(this, event);"> -->
 </body>
 
 <script type="text/javascript">
 	window.onclick = function(e) {
 		console.log(e);
+		console.log(e.clientX);
+		console.log(e.clientY);
+		console.log(e.altKey);
+		console.log(e.ctrlKey);
+
+		console.log(e.button); // 检测鼠标哪个按键按下
 	}
+
+	window.oncontextmenu = function(e) {
+		console.log('right click');
+	}
+
 </script>
 
 </html>
