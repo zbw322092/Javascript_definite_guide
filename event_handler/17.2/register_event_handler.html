@@ -1,0 +1,69 @@
+<!-- 注册事件处理程序 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<button id="my-button">click</button>
+</body>
+
+<script type="text/javascript">
+	var button = document.getElementById('my-button');
+	
+	button.onclick = function() {
+		window.alert('here');
+	}
+
+	button.onclick = function() {
+		window.alert('here again');
+	}
+
+	button.onmouseover = function() {
+		window.alert('mouse over');
+	}
+
+	button.addEventListener('click', function() {
+		window.alert('there');
+	}, true);
+
+	button.addEventListener('click', function() {
+		window.alert('there again');
+	}, true);	
+
+	button.removeEventListener('click', function() {
+		console.log('click event removed');
+	});
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
