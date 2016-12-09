@@ -1,0 +1,68 @@
+<!-- 脚本化CSS类 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<p class="paragraph-style">it is a paragraph</p>
+	<button onclick="changeStyle(document.getElementsByClassName('paragraph-style')[0])">change style</button>
+
+	<p id="secondParagraph" class="paragraph common-color common-font-size">it is another paragraph</p>
+</body>
+
+<script type="text/javascript">
+	function changeStyle(e) {
+		console.log(e.className);
+		e.className = 'paragraph-style-v2';
+	}
+
+	var secondParagraph = document.getElementById('secondParagraph');
+	console.log(secondParagraph.classList);
+	secondParagraph.classList.add('paragraph-style');
+	// secondParagraph.classList.toggle('paragraph-style');
+</script>
+
+<style type="text/css">
+	.paragraph-style {
+		font-size: 14px;
+		color: orange;
+	}
+
+	.paragraph-style-v2 {
+		font-size: 18px;
+		color: red;
+	}
+</style>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
