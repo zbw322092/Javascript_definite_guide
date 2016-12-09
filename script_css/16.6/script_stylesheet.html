@@ -1,0 +1,94 @@
+<!-- 脚本化样式表 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<p class="paragraph-style">it is a paragraph</p>
+	<button onclick="changeStyle(document.getElementsByClassName('paragraph-style')[0])">change style</button>
+
+	<p id="secondParagraph" class="paragraph common-color common-font-size">it is another paragraph</p>
+</body>
+
+<style type="text/css">
+	.paragraph-style {
+		font-size: 14px;
+		color: orange;
+	}
+
+	.paragraph-style-v2 {
+		font-size: 18px;
+		color: red;
+	}
+</style>
+
+<script type="text/javascript">
+	console.log(document.styleSheets[0]);
+	// document.styleSheets[0].disabled = true; // 禁用了这个指定的样式表
+	
+	console.log(document.styleSheets[0].cssRules);
+
+	document.styleSheets[0].insertRule("p {text-weight: bold;}", 0);
+
+
+	function addStyles(styles) {
+		var styleElt, styleSheet;
+		if (document.createStyleSheet) {
+			styleSheet = document.createStyleSheet();
+		} else {
+			var head = document.getElementsByTagName("head")[0];
+			styleElt = document.createElement("style");
+			head.appendChild(styleElt);
+			styleSheet = document.styleSheets[document.styleSheets.length - 1];
+		}
+
+		if (typeof styles === "string") {
+			if (styleElt) styleElt.innerHTML = styles;
+			else styleSheet.cssText = styles;
+		} else {
+			var i = 0;
+			for (selector in styles) {
+				if (styleSheet.insertRule) {
+					var rule = selector + "{" + styles[selector] + "}";
+					styleSheet.insertRule(rule, i++);
+				} else {
+					styleSheet.addRule(selector, styles[selector], i++);
+				}
+			}
+		}
+	}
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
