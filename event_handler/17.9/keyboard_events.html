@@ -1,0 +1,28 @@
+<!-- 键盘事件 -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <input></input>
+</body>
+
+<script type="text/javascript">
+  var input = document.getElementsByTagName('input')[0];
+  // 按键按下足够长的时间会触发多个keydown事件
+  input.addEventListener('keydown', function(e) {
+    // console.log('key down');
+    // console.log(e.keyCode);
+    console.log(e.key);
+    console.log(e.keyIdentifier); // 使用这个属性的时候，浏览器console中会显示'KeyboardEvent.keyIdentifier' is deprecated and will be removed in M53, around September 2016.
+
+  });
+
+  input.addEventListener('keyup', function(e) {
+    // console.log('key up');
+    // console.log(e.keyCode);
+  });
+
+
+</script>
+
+</html>
