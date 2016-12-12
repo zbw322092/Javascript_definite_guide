@@ -1,0 +1,74 @@
+<!-- 拖放事件 -->
+<!DOCTYPE html>
+<html>
+<body>
+	<h3>drag timestamp from clock</h3>
+	<span id="clock"></span>
+	<textarea cols="60" rows="20"></textarea>
+</body>
+
+<!-- <script type="text/javascript" src="whenReady.js"></script> -->
+<script type="text/javascript">
+	(function whenReady () {
+			var clock = document.getElementById('clock');
+			var icon = new Image();
+			icon.src = "http://img0.imgtn.bdimg.com/it/u=1117270736,1859176724&fm=214&gp=0.jpg";
+	
+			function displayTime() {
+				var now = new Date();
+				var hrs = now.getHours(), mins = now.getMinutes();
+				if (mins < 10) mins = "0" + mins;
+				clock.innerHTML = hrs + ":" + mins;
+				setTimeout(displayTime, 60000);
+			}
+	
+			displayTime();
+	
+			clock.draggable = true;
+			clock.ondragstart = function(event) {
+				console.log(event);
+				var event = event || window.event;
+				var dt = event.dataTransfer;
+				dt.setData("Text", Date() + "\n");
+				// dt.setData("Text", event.timeStamp + "\n");
+				
+				if (dt.setDragImage)
+					dt.setDragImage(icon, 0, 0);
+			};
+		})();
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
