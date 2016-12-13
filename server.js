@@ -9,7 +9,11 @@ var server = http.createServer(function(req, res) {
 app.use(express.static(__dirname + ''));
 
 app.use('/', function(req, res) {
-	res.send('here');
+	res.send('here');	
+});
+
+app.post('/post_route', function(req, res) {
+	res.send('req');
 });
 
 app.listen(8000, function() {
