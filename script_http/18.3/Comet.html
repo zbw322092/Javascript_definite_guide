@@ -1,0 +1,57 @@
+<!-- Comet -->
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	var nick = prompt("Enter your nickname");
+	var input = document.getElementById("input");
+	input.focus();
+
+	var chat = new EventSource("/chat");
+	chat.onmessage = function(event) {
+		var msg = event.data;
+		var node = document.createTextNode(msg);
+		var div = document.createElement("div");
+		div.appendChild(node);
+		document.body.insertBefore(div, input);
+		input.scrollIntoView();
+	}
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
