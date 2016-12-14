@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	localStorage.name = "Bowen";
+	localStorage.age = 24; // 会被自动转换成string
+	console.log(localStorage);
+
+	sessionStorage.person = "Bowen2";
+	console.log(sessionStorage);
+
+	localStorage.setItem("x", 1);
+	console.log(localStorage.getItem("x"));
+	for (var i = 0; i < localStorage.length; i++) {
+		var name = localStorage.key(i);
+		var value = localStorage.getItem(name);
+		console.log(value);
+	}
+	localStorage.removeItem("x");
+	// localStorage.clear();
+	console.log(localStorage);
+
+
+	localStorage.o = {x: 1};
+	console.log(localStorage);
+	console.log(localStorage.name);	
+
+	window.onstorage = function() {
+		console.log('local storage changed');
+		console.log(event);
+	}
+
+	// localStorage.setItem("name", "Bowen3");
+	setTimeout(function() {
+		localStorage.name = "Bowen3";
+		console.log(localStorage.name);		
+	}, 1000);
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
