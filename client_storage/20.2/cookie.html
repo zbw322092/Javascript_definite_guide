@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	console.log(navigator.cookieEnabled);
+	document.cookie = "version=" + encodeURIComponent(document.lastModified);
+	console.log(decodeURIComponent(document.cookie));
+
+	function setcookie(name, value, daysToLive) {
+		var cookie = name + "=" + encodeURIComponent(value);
+		if (typeof daysToLive === "number")
+			cookie += "; max-age=" + (daysToLive*60*60*24);
+		document.cookie = cookie;
+	}
+	setcookie('author', 'Bowen', 1);
+	setcookie('author', 'Bowen2', 1);
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
