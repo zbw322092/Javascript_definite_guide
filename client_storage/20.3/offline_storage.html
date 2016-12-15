@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function status(msg) {
+		document.getElementById("statusline").innerHTML = msg;
+		console.log(msg);
+	}
+
+	window.applicationCache.onchecking = function() {
+		status("Checking for a new version");
+		return false;
+	};
+
+	window.applicationCache.onnoupdate = function() {
+		status("This version is up-to-date");
+		return false;
+	};
+
+	window.applicationCache.ondownloading = function() {
+		status("Downloading new version");
+		return false;
+	};
+
+	window.applicationCache.onprogress = function(e) {
+		var progress = "";
+		if (e && e.lengthComputable)
+			progress = " " + Math.round(100 * e.loaded / e.total) + "%";
+		else
+			progress = "(" + ++progresscount + ")";
+
+		status("Downloading new version" + progress);
+		return false;
+	};
+
+	window.applicationCache.onupdateready = function() {
+		status("Aa new version has been downloaded. Reload to run it");
+		return false;
+	};
+
+	window.applicationCache.onerror = function() {
+		status("Could't load manifest or cache application");
+		return false;
+	};
+
+	window.applicationCache.onobsolete = function() {
+		status("This application is no longer cached. " + 
+			"Reload to get the latest version from the network.");
+		return false;
+	};
+
+
+
+
+	
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
