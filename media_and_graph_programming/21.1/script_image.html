@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<!-- <img src="http://img1.juimg.com/141014/330737-141014220R815.jpg"
+	onmouseover="this.src='http://pic.58pic.com/58pic/13/68/96/82p58PICzN4_1024.jpg'"
+	onmouseout="this.src='http://img1.juimg.com/141014/330737-141014220R815.jpg'"> -->
+
+	<img src="http://pic.58pic.com/58pic/13/68/96/82p58PICzN4_1024.jpg" 
+	data-rollover="http://img1.juimg.com/141014/330737-141014220R815.jpg">
+</body>
+
+<script type="text/javascript">
+	// (new Image()).src = "http://pic.58pic.com/58pic/13/68/96/82p58PICzN4_1024.jpg"
+
+
+	(function() {
+			for (var i = 0; i < document.images.length; i++) {
+				var img = document.images[i];
+				var rollover = img.getAttribute("data-rollover");
+				if (!rollover)
+					continue;
+	
+				(new Image()).src = rollover;
+				img.setAttribute("data-rollout", img.src);
+				img.onmouseover = function() {
+					this.src = this.getAttribute("data-rollover");
+				};
+				img.onmouseout = function() {
+					this.src = this.getAttribute("data-rollout");
+				};
+			}
+		})();
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
