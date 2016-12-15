@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<video id="demo_video" width="640" height="840" controls preload loop="true">
+		<source src="./media/mv_demo.mp4" type="video/mp4">
+	</video>
+</body>
+
+<script type="text/javascript">
+	// var a = new Audio();
+	// if (a.canPlayType("audio/mp3")) {
+	// 	a.src = './media/Bob Dylan - Tempest.mp3';
+	// 	a.play();
+	// }
+	
+	var demoVideo = document.getElementById("demo_video");
+	// demoVideo.play();
+	// setTimeout(function() {
+	// 	demoVideo.pause();
+	// }, 8000);
+	demoVideo.currentTime = 10;
+	console.log(demoVideo.initialTime);
+	setTimeout(function() {
+		console.log(demoVideo.duration);
+	},5000);
+	
+
+	demoVideo.volume = 0.5;
+	// demoVideo.muted = true;
+
+	demoVideo.playbackRate = 1;
+
+	console.log(demoVideo.controls);
+	console.log(demoVideo.loop);
+	console.log(demoVideo.metadata);
+	demoVideo.autoplay = true;
+
+	setTimeout(function() {
+		console.log(demoVideo.buffered);
+		console.log(demoVideo.buffered.start(0));
+		console.log(demoVideo.buffered.end(0));
+	},2000);
+
+	setTimeout(function() {
+		console.log(demoVideo.played);
+		console.log(demoVideo.played.start(0));
+		console.log(demoVideo.played.end(0));
+	},5000);
+
+	// var interval = setInterval(function() {
+	// 	var percentage = Math.floor(demoVideo.buffered.end(0) / demoVideo.duration*100);
+	// 	console.log('Buffered percentage: ' + percentage + '%');
+	// },1000);
+
+	// setInterval(function() {
+	// 	console.log(demoVideo.readyState);	
+	// }, 1000);
+	
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
