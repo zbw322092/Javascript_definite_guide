@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+</body>
+
+<script type="text/javascript">
+	function getmap() {
+		if (!navigator.geolocation)
+			throw "Geolocation not supported";
+
+		var image = document.createElement("img");
+		navigator.geolocation.getCurrentPosition(setMapURL, error);
+		return image;
+
+		function setMapURL(pos) {
+			var latitude = pos.coords.latitude;
+			var longtitude = pos.coords.longtitude;
+			var accuracy = pos.coords.accuracy;
+
+			var url = "http://api.map.baidu.com/staticimage" +
+				"?center=" + latitude + "," + longtitude +
+				"&size=640*640";
+
+			var zoomlevel = 20;
+			if (accuracy > 80)
+				zoomlevel -= Math.round(Math.log(accuracy/50)/Math.LN2);
+
+			url += "&zoom=" + zoomlevel;
+		}
+
+		function error() {
+			console.log('error');
+		}
+	}
+
+	getmap();
+
+
+	var options = {
+	  enableHighAccuracy: true,
+	  timeout: 5000,
+	  maximumAge: 0
+	};
+
+	function success(pos) {
+	  var crd = pos.coords;
+
+	  console.log('Your current position is:');
+	  console.log('Latitude : ' + crd.latitude);
+	  console.log('Longitude: ' + crd.longitude);
+	  console.log('More or less ' + crd.accuracy + ' meters.');
+	};
+
+	function error(err) {
+	  console.warn('ERROR(' + err.code + '): ' + err.message);
+	};
+
+	navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
