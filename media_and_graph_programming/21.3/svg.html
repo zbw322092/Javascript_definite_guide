@@ -12,8 +12,6 @@
 		<rect x="100" y="200" width="800" height="600" 
 		stroke="black" stroke-width="10" fill="url(#fade)" />
 	</svg>
-
-	<div id="chartArea"></div>
 </body>
 
 <script type="text/javascript">
@@ -45,8 +43,8 @@
 				big = 1;
 
 			var path = document.createElementNS(svgns, "path");
-			var d = "M " + cx + "," + cy + "L" + x1 + "," 
-				+ y1 + "A" + r + "," + r + "0" + big + "1" + x2 +
+			var d = "M " + cx + "," + cy + " L " + x1 + "," 
+				+ y1 + " A " + r + "," + r + " 0 " + big + " 1 " + x2 +
 				"," + y2 + " Z";
 
 			path.setAttribute("d", d);
@@ -83,7 +81,8 @@
 		['red', 'blue', 'yellow', 'green'],
 		['North', 'South', 'East', 'West'], 400, 100);
 
-	document.getElementById("chartArea").appendChild(chart);
+	console.log(chart);
+	document.getElementsByTagName("body")[0].appendChild(chart);
 
 
 </script>
