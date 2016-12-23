@@ -399,6 +399,11 @@
 	o3.height = undefined;
 	console.log(o3);
 	console.log('height' in o3); // true
+
+	console.log(o.propertyIsEnumerable('toString')); // false
+
+	console.log(Object.keys(o3)); // Array [ "1", "name", "height" ]
+	console.log(Object.getOwnPropertyNames(o3));
 </script>
 
 </html>
