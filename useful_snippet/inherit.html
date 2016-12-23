@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	// 下面这个function实现了在Object.create()方法不可得的时候实现对象的继承。
+	// 但是注意这里实现的继承和Object.create()方法实现的继承不完全一样。
+
+	function inherit(p) {
+		if (p == null)
+			throw TypeError();
+
+		if (Object.create)
+			return Object.create(p);
+
+		var type = typeof p;
+		if (type != 'object' && type != 'function')
+			throw TypeError();
+
+		// 不然的话就创建一个对象，这个对象的原型是p
+		function f() {};
+		f.prototype = p;
+		return new f();
+	}
+
+	var inheritResult = inherit({
+		name: 'Bowen',
+		age: 24
+	});
+	console.log(inheritResult);
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
