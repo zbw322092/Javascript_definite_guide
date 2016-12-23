@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	var a =         1234;
+	console.log(a);
+
+	/*
+	dcakn
+	cniscs
+	csicn
+	 */
+	
+	/*
+	// it it ok
+	cnaskldn
+	 */
+	
+	// var 1a = 'ok';
+
+	var a
+	a
+	=
+	3
+	console.log(a);
+
+
+	var a = {
+		name: 'Bowen',
+		age: 24
+	};
+	var b = a;
+	console.log(b);
+
+	b.name = 'Hui';
+	console.log(b);
+	console.log(a);
+
+	console.log(0xff === 255);
+	console.log(0377 === 255);
+
+	console.log(6e2);
+
+	console.log(1.7e308);
+	console.log(1.8e308);
+
+	console.log(-1.7e308);
+	console.log(-1.8e308);
+
+	console.log(Infinity / 1000000);
+	console.log(Infinity - Infinity);
+	console.log(Infinity / Infinity);
+	console.log(Infinity + Infinity);
+	console.log(Infinity * Infinity);
+	console.log(Infinity * 0);
+	console.log(Infinity / 0);
+
+	console.log(-0);
+
+	console.log(100/0);
+	console.log(-23/0);
+	console.log(100/-0);
+	console.log(0/0);
+	console.log(0/-0);
+
+	console.log(0 === -0);
+
+	console.log(Number.MAX_VALUE);
+	console.log(Number.MAX_VALUE + 1);
+	console.log(Number.MAX_VALUE + 1);
+	console.log(Number.MAX_VALUE + 99e20);
+	console.log(Number.MAX_VALUE + Number.MAX_VALUE);
+	console.log(Number.MAX_VALUE - Number.MAX_VALUE);
+	console.log(Number.MAX_VALUE / Number.MAX_VALUE);
+	console.log(Number.MAX_VALUE / 99e20);
+	console.log(Number.MAX_VALUE / 0);
+	console.log(Number.MAX_VALUE * 0);
+	console.log(Number.MAX_VALUE / -0);
+
+	console.log(Number.MIN_VALUE);
+	console.log(Number.MIN_VALUE - 1);
+	console.log(Number.MIN_VALUE / 2);
+	console.log(Number.MIN_VALUE / -2);
+	console.log(Number.MIN_VALUE === 0);
+	console.log(Number.MIN_VALUE / 0);
+	console.log(Number.MIN_VALUE + 23);
+	console.log(Number.MIN_VALUE * 100000);
+
+	console.log(NaN === NaN); // false
+	console.log(NaN !== NaN); // true
+	console.log(Infinity === Infinity); // true
+
+	console.log(isNaN(Infinity));
+	console.log(isNaN(-0));
+	console.log(isNaN(NaN));
+
+	console.log(isFinite(-0));
+	console.log(isFinite(Number.MAX_VALUE));
+	console.log(isFinite(NaN));
+
+
+	console.log('isNaN: ', isNaN(undefined)); // true
+	console.log(isNaN(NaN)); // ture
+	console.log(isNaN({})); // ture
+	console.log(isNaN({
+		name: 'Bowen',
+		age: 24
+	})); // true  object数据类型不能被转换成number型
+	console.log(isNaN(0)); // false
+	console.log(isNaN(Infinity)); // false
+
+
+	console.log('isNaN: ', Number.isNaN(undefined)); // false
+	console.log(Number.isNaN(NaN)); // ture
+	console.log(Number.isNaN({})); // false
+	console.log(Number.isNaN({
+		name: 'Bowen',
+		age: 24
+	})); // false
+	console.log(Number.isNaN(0)); // false
+	console.log(Number.isNaN(Infinity)); // false
+
+
+	console.log('isFinite: ',isFinite(Infinity));  // false
+	console.log(isFinite(-Infinity)); // false
+	console.log(isFinite(NaN)); // false
+	console.log(isFinite(undefined)); // false
+	console.log(isFinite('it is a string')); // false
+	console.log(isFinite(-0)); // true
+	console.log(isFinite(Number.MAX_VALUE)); // true
+
+	console.log(Number('it is a string')); // NaN
+	console.log(Number(undefined)); // NaN
+
+
+	// console.log('it is a 
+	// 	string');
+	// console.log('it is a'
+	// 	'string');
+	
+	console.log('it is a' +
+		' string');
+
+
+	console.log('it is a \nstring');
+	console.log('it is\
+ a\
+ string');
+
+	document.write('it is \o a string<br>');
+	document.write('it is \b a string<br>');
+	document.write('it is \t a string<br>');
+	document.write('it is \v a string<br>');
+	document.write('it is \f a string<br>');
+	document.write('it is \r a string<br>');
+	document.write('it is \\ a string<br>');
+	document.write('it is \' a string<br>');
+	document.write('it is \u0027 a string<br>');
+
+
+	console.log('it is a string'.charAt(3));
+	console.log('it is a string'[4]);
+
+	var a = '' || 1;
+	console.log('a: ', a); // 1
+
+	var b = ' ' || 1;
+	console.log('b: ', b);
+
+	console.log('it is a string'.toString());
+
+	console.log(typeof true.toString());
+
+	console.log(null == undefined); // true
+	console.log(null === undefined); // false
+
+	console.log(undefined = 'value'); // 'value'
+	// console.log(null = 'value');
+
+
+	var s = 'test';
+	var S = new String('test');
+	console.log(typeof s);
+	console.log(typeof S);
+	console.log(s == S); // true
+	console.log(s === S); // false
+	s.len = 4;
+	console.log(s.len); // undefined
+	S.len = 4;
+	console.log(S.len); // 4
+
+
+
+	var a = {
+		name: 'Bowen',
+		age: 24
+	};
+
+	var b = {
+		name: 'Bowen',
+		age: 24
+	};
+
+	console.log(a == b); // false
+	console.log(a === b); // false
+
+	var c = a;
+	var d = a;
+	console.log(c === d); // true
+
+	var e = c;
+	console.log(e === a);
+
+	console.log(undefined == 0); // false
+	console.log(undefined == '0'); // false
+	console.log(null == '0'); // false
+	console.log(null == 0); // false
+	console.log(undefined == false); // false
+
+	console.log(String(999));
+	var n = 999;
+	console.log(n.toString());
+	console.log(n.toString() === String(999));
+
+	// console.log(999.toString());
+	
+	console.log(n.toString(2));
+
+	var n = 123456.789;
+	console.log(n.toPrecision(2));
+	console.log(n.toPrecision(4));
+	console.log(n.toFixed(2));
+	console.log(n.toFixed(0));
+	console.log(n.toFixed(-1));
+	console.log(n.toFixed(-5));
+	console.log(n.toFixed(-6)); // 0
+	console.log(n.toFixed('aa'));
+
+
+	console.log({
+		name: 'Bowen',
+		age: 24
+	}.toString());
+
+	var func = function testing() {
+		return 'here';
+	};
+	console.log(func.toString());
+	console.log(function testing() {
+		return 'here';
+	}.toString());
+
+	console.log([1,2,3,4].toString());
+
+	var g = [1,2,3,4];
+	console.log(g.valueOf());
+	console.log(g.valueOf() === g); // true
+
+	console.log(func.valueOf());
+	console.log(func.valueOf() === func); // true
+
+
+	console
+		.log('aaa');
+
+	console.log({name: 'bowen'} + 222);
+	console.log(['name','bowen'] + 222);
+	console.log(function() {
+		return 'ok';
+	} + 222);
+
+	console.log([123] == 123); // true
+	console.log(['ok'] == 'ok'); // true
+	console.log({name: 'bowen', age: 24}.toString());
+	console.log({name: 'bowen', age: 24} == '[object Object]'); // true
+	console.log({name: 'bowen', age: 24}.valueOf());
+
+	var d = Date.now();
+	console.log(d);
+	console.log(typeof d);
+
+	var e = new Date();
+	console.log(e);
+	console.log(typeof e); // object
+	console.log(e.toString());
+	console.log(e.valueOf());
+	console.log(e == 'Thu Dec 22 2016 11:19:36 GMT+0800 (CST)'); // false
+	console.log(e == 1482376831357); // false
+
+
+	// okvalue = '1234';
+	// console.log(okvalue);
+
+	(function scopeTest() {
+			console.log(abc);
+			// console.log(abcd);
+			var abc;
+			abc = 123;
+			console.log(abc);
+		})();
+
+
+	var deleteThisValue = '10000';
+	deleteThisValue2 = '20000';
+	console.log(window.deleteThisValue);
+	console.log(window.deleteThisValue2);
+	delete deleteThisValue;
+	delete deleteThisValue2;
+	console.log(window.deleteThisValue);
+	console.log(window.deleteThisValue2);
+
+	var o = {
+		1: 'bowen',
+		'': 'aaa',
+		'+': 'plus',
+		$: 'money',
+		_: 'underline'
+	};
+
+	var o2 = {
+		name: 'bowen',
+		age: 24
+	};
+
+	// var q = {
+	// 	+: 'plus',
+	// 	,:'mark'
+	// };
+
+	console.log(o);
+
+
+	console.log(new String());
+	console.log(new String() === []);
+	console.log(typeof new String());
+	console.log(new String() == []);
+
+	// console.log(Object.prototype(o));
+	// console.log(Object.prototype(o2));
+	console.log(Object.prototype);
+	console.log(Object.prototype.constructor);
+
+
+	console.log(Object.create(o2));
+
+	console.log(Object.create(null));
+
+	console.log(Object.create(Object.prototype));
+
+	// console.log(Object.create(111));
+
+	var a = Object.create([1,2,3]);
+	var b = Object.create(function testprototype() {return 'here'});
+	console.log(a);
+	console.log(b);
+	console.log(a[0]); // 1
+	console.log(a[1]); // 2
+	console.log(b['testprototype']);
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
