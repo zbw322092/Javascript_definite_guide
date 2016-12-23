@@ -361,6 +361,44 @@
 
 	var c = new Object(o2);
 	console.log(c);
+
+	var a = 'name';
+	console.log(o2.a);
+
+
+	var o3 = Object.create(o2);
+	console.log(o3);
+	console.log(o3.name); // 'bowen'
+	o3.name = '123';
+	console.log(o2); // 'bowen'
+
+	var o4 = Object.create(o3);
+	console.log(o4);
+	console.log(o4.name); // '123'
+
+	var personalName = o2.name;
+	console.log(personalName);
+	delete o2.name;
+	console.log(o2.name);
+	console.log(personalName);
+
+	var x = 1;
+	console.log(window.x);
+	console.log(delete this.x); // false
+
+
+	console.log('name' in o3); // true
+	console.log('aaaaa' in o3); // false
+	console.log('toString' in o3); // true
+	console.log(o3);
+	o3[1] = 111;
+	console.log(o3);
+	console.log(1 in o3); // true
+	console.log('1' in o3); // true
+
+	o3.height = undefined;
+	console.log(o3);
+	console.log('height' in o3); // true
 </script>
 
 </html>
