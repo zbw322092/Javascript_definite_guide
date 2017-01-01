@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function classOf(o) {
+		if (o === null) return "Null";
+		if (o === undefined) return "Undefined";
+		return Object.prototype.toString.call(o).slice(8,-1);
+	}
+
+	var o = {
+		x: 1
+	};
+
+	var n = 123;
+
+	var s = "it is a string";
+
+	var b = true;
+
+	var a = [1,2,3,4];
+
+	var f = function() {
+		return 'here';
+	};
+
+	var d = new Date();
+
+	var r = /./;
+
+	var aa = new Array([1,2,3,4,5]);
+
+	console.log(classOf(o)); // Object
+	console.log(classOf(n)); // Number
+	console.log(classOf(s)); // String
+	console.log(classOf(b)); // Boolean
+	console.log(classOf(a)); // Array
+	console.log(classOf(f)); // Function
+	console.log(classOf(d)); // Date
+	console.log(classOf(r)); // RegExp
+	console.log(classOf(window)); // Winodw
+	console.log(classOf(aa)); // Array
+
+
+
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
