@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	// 这是通过九九乘法表来演示多维数组。
+	var table = new Array(10);
+	for (var i = 0; i < table.length; i++)
+		table[i] = new Array(10);
+
+	for (var row = 0; row < table.length; row++) {
+		for (var col = 0; col < table[row].length; col++)
+			table[row][col] = row*col;
+	}
+
+	console.log(table);
+	console.log(table[5][7]);
+
+
+</script>
+
+</html>
+
