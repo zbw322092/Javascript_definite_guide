@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	
+	function arrayIteration(o) {
+		var keys = Object.keys(o);
+		var values = [];
+		for (var i = 0, len = keys.length; i < len; i++) {
+			var key = keys[i];
+			values.push(o[key]);
+		}
+		return values;
+	}
+
+	var a1 = [1,2,3,,,,6,7,8,undefined,9,null,10];
+	console.log(arrayIteration(a1));
+	
+	function arrayIterationNoUndefinedAndNull(o) {
+		var keys = Object.keys(o);
+		var values = [];
+		for (var i = 0, len = keys.length; i < len; i++) {
+			var key = keys[i];
+			if (!o[key]) continue;
+			values.push(o[key]);
+		}
+		return values;
+	}
+	console.log(arrayIterationNoUndefinedAndNull(a1));
+
+
+	function arrayIterationKeepUndefinedAndNull(o) {
+		var keys = Object.keys(o);
+		var values = [];
+		for (var i = 0, len = keys.length; i < len; i++) {
+			var key = keys[i];
+			if (!(i in o)) continue;
+			values.push(o[key]);
+		}
+		return values;
+	}
+	console.log(arrayIterationKeepUndefinedAndNull(a1));
+
+
+	function forinArrayIteration(o) {
+		var values = [];
+		for (var index in o) {
+			values.push(o[index]);
+		}
+		return values;
+	}
+	console.log(forinArrayIteration(a1));
+
+
+	function forEachArrayIteration(o) {
+		o.forEach(function(x) {
+			console.log(x);
+		});
+	}
+
+	var a2 = [1,2,3,,,,6,8];
+	a2[1.23] = 23;
+	console.log(a2); // [1, 2, 3, 6: 6, 7: 8, 1.23: 23]
+
+	forEachArrayIteration(a2); // 结果中并没有显示1.23这个key对应的值
+
+
+
+</script>
+
+</html>
+
