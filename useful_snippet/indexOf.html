@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function findAll(o, x) {
+		var results = [],
+		len = o.length;
+		pos = 0;
+
+		while(pos < len) {
+			pos = o.indexOf(x, pos);
+			if (pos === -1) break;
+			results.push(pos);
+			pos = pos + 1;
+		}
+		return results;
+	}
+
+	var a = [1,2,3,1,3,9,3,1,5,0];
+	console.log(findAll(a, 1));
+
+</script>
+
+</html>
+
