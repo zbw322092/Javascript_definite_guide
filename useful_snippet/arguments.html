@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function maxNumber() {
+		var max = Number.NEGATIVE_INFINITY;
+		if (arguments.length === 0) return;
+		for (var i = 0; i < arguments.length; i++) {
+			if (arguments[i] > max) max = arguments[i];
+		}
+		return max;
+	}
+
+	console.log(maxNumber(1,2,19,0,39183,327,319));
+	console.log(maxNumber());
+</script>
+
+</html>
+
