@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	
+	countCallTimes.counter = 0;
+	function countCallTimes() {
+		console.log(countCallTimes.counter++);
+	}
+
+	countCallTimes();
+	countCallTimes();
+	countCallTimes();
+	countCallTimes();
+
+
+	function factorial(n) {
+		if (isFinite(n) && n > 0 && n == Math.round(n)) {
+			if (!(n in factorial))
+				factorial[n] = n * factorial(n-1);
+			return factorial[n];
+		} else {
+			return NaN;
+		}
+	}
+
+	factorial[1] = 1;
+
+	console.log(factorial(4)); // 24
+
+	
+
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
