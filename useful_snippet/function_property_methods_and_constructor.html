@@ -61,7 +61,13 @@
 		};
 	}
 
-	
+	var scope = 'global';
+	function f2() {
+		var scope = 'local';
+		return new Function("return scope");
+	}
+	console.log(f2()()); // global
+
 
 </script>
 
