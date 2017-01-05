@@ -58,9 +58,48 @@
 	console.log(c.count); // 1002
 	c.count = 2000;
 	console.log(c.count); // 2000
-	c.count = 2000; // Uncaught Error: count can only be set to a larger value(…)
+	// c.count = 2000; // Uncaught Error: count can only be set to a larger value(…)
 
 
+	function addPrivateProperty(o, name, predicate) {
+		var value;
+		o["get" + name] = function() {
+			return value;
+		};
+		o["set" + name] = function(v) {
+			if (predicate && !predicate(v))
+				throw Error("set" + name + ": invalid value" + v);
+			else
+				value = v;
+		};
+	}
+
+
+
+	function constfunc(v) {
+		return function() {
+			return v;
+		};
+	}
+	var funcs = [];
+	for (var i = 0; i < 10; i++)
+		funcs[i] = constfunc(i);
+
+	console.log(funcs[5]()); // 5
+
+
+	function constfuncs() {
+		var funcs = [];
+		for (var i = 0; i < 10; i++) {
+			funcs[i] = function() {
+				return i;
+			};
+		}
+		return funcs;
+	}
+
+	var funcs = constfuncs();
+	console.log(funcs[5]()); // 10
 
 
 </script>
