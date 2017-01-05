@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function check(args) {
+		var actual = args.length; // 实参的真实个数。
+		var expected = args.callee.length; // 期望的实参个数。
+		if (actual !== expected)
+			console.log("wrong");
+		else
+			console.log("right");
+	}
+
+	function f(x,y,z) {
+		check(arguments);
+	}
+
+	f(1,2,3); // right
+	f(1,2,3,4); // wrong
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
