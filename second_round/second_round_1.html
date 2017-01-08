@@ -233,10 +233,10 @@
 	console.log(n.toPrecision(4));
 	console.log(n.toFixed(2));
 	console.log(n.toFixed(0));
-	console.log(n.toFixed(-1));
-	console.log(n.toFixed(-5));
-	console.log(n.toFixed(-6)); // 0
-	console.log(n.toFixed('aa'));
+	// console.log(n.toFixed(-1));
+	// console.log(n.toFixed(-5));
+	// console.log(n.toFixed(-6)); // 0
+	// console.log(n.toFixed('aa'));
 
 
 	console.log({
@@ -404,6 +404,232 @@
 
 	console.log(Object.keys(o3)); // Array [ "1", "name", "height" ]
 	console.log(Object.getOwnPropertyNames(o3));
+
+	var o = {};
+	console.log(o);
+	Object.defineProperty(o, "x", {
+		value: 1,
+		writable: true,
+		enumerable: false,
+		configurable: true
+	});
+	console.log(o);
+	console.log(Object.keys(o)); 
+	// 可以看出来，o中的x属性现在是存在了，但是并不可枚举，所以通过Object.keys方法列举属性出来
+	// 的结果是个空的array
+
+	o.x = 2;
+	console.log(o);
+
+	Object.defineProperty(o, "x", {
+		writable: false
+	});
+	o.x = 3;
+	console.log(o); // 任然是2，这里并不会报错。但是在严格模式下面会报错。
+
+	Object.defineProperty(o, "x", {
+		value: 4
+	});
+	console.log(o.x); // 4  这和属性虽然不可写了，但是可以配置，所以在这里可以通过配置的方式来改变它的值
+
+	var oo = {x: 1}
+	var o1 = new Object({
+		x: 1
+	});
+
+	var o2 = {
+		x: 1
+	};
+
+	var o3 = Object.create(oo);
+
+	console.log(o1);
+	console.log(o2);
+	console.log(o3);
+
+	console.log(Object.getPrototypeOf(o1));
+	console.log(Object.getPrototypeOf(o2));
+	console.log(Object.getPrototypeOf(o3));
+
+	console.log(Object.getPrototypeOf(o1) === Object.prototype); // true
+	console.log(Object.getPrototypeOf(o2) === Object.prototype); // true
+	console.log(Object.getPrototypeOf(o3) === oo); // true
+	console.log(Object.getPrototypeOf(o3) === Object.prototype); // false
+
+	console.log(o1.constructor);
+	console.log(o2.constructor);
+	console.log(o3.constructor);
+
+	console.log(o2.constructor === o1.constructor); // true
+	console.log(o2.constructor === o3.constructor); // true
+
+	var ob = {};
+	Object.defineProperty(ob, "c", {
+		value: 3,
+		enumerable: false,
+		configurable: false
+	});
+	console.log(ob);
+
+	console.log(Object.getOwnPropertyDescriptor(ob, "c"));
+
+	ob.c = 1234;
+	console.log(ob);
+
+	// Object.defineProperty(ob, "c", {
+	// 	value: 1234
+	// }); // 因为设置为了不可配置，所以这里报错Uncaught TypeError: Cannot redefine property: c(…)
+
+	Object.defineProperty(ob, "f", {
+		value: 6
+	});
+
+	console.log(Object.getOwnPropertyDescriptor(ob, "f"));
+	// Object {value: 6, writable: false, enumerable: false, configurable: false}
+
+	ob.d = 1111;
+	console.log(ob);
+	console.log(Object.getOwnPropertyDescriptor(ob, "d"));
+	// Object {value: 1111, writable: true, enumerable: true, configurable: true}
+
+	var ob2 = {
+		a: 1,
+		b: 2
+	};
+
+	ob2.c = 3;
+	Object.defineProperty(ob2, "d", {
+		value: 4,
+		enumerable: false
+	});
+	console.log(ob2);
+
+	for (var key in ob2)
+		console.log(ob2[key]);
+
+	console.log(Object.keys(ob2)); // ["a", "b", "c"]
+
+	console.log(JSON.stringify(ob2)); // {"a":1,"b":2,"c":3}
+
+	console.log(ob2.d);
+
+	console.log(Object.getOwnPropertyNames(ob2)); // ["a", "b", "c", "d"]
+
+
+
+	var ob3 = {
+		a: 1,
+		b: 2
+	};
+
+	Object.defineProperty(ob3, "c", {
+		value: 3
+	});
+
+	console.log(Object.getOwnPropertyDescriptor(ob3, "a"));
+	console.log(Object.getOwnPropertyDescriptor(ob3, "b"));
+	console.log(Object.getOwnPropertyDescriptor(ob3, "c"));
+
+	Object.freeze(ob3);
+	console.log(Object.getOwnPropertyDescriptor(ob3, "a"));
+	console.log(Object.getOwnPropertyDescriptor(ob3, "b"));
+	console.log(Object.getOwnPropertyDescriptor(ob3, "c"));
+
+
+	var ob4 = {};
+	Object.defineProperty(ob4, "a", {
+		value: 1,
+		writable: true,
+		configurable: false,
+		enumerable: true
+	});
+
+	console.log(ob4);
+	ob4.a = 1234;
+	console.log(ob4);
+
+	Object.defineProperty(ob4, "a", {
+		value: 2
+	});
+	console.log(ob4);
+
+	// Object.defineProperty(ob4, "a", {
+	// 	enumerable: false
+	// }); // Uncaught TypeError: Cannot redefine property: a(…)
+	
+	delete ob4.a;
+	console.log(ob4); // 未奏效
+
+	var ob5 = {
+		x: 1
+	};
+	console.log(Object.getOwnPropertyDescriptor(ob5, "x"));
+
+	Object.seal(ob5);
+	console.log(Object.getOwnPropertyDescriptor(ob5, "x"));
+
+	ob5.x = 2222;
+	console.log(ob5);
+
+	delete ob5.x;
+	console.log(ob5);
+
+	ob5.y = 123;
+	console.log(ob5);	
+
+
+	var ob6 = {
+		a: [1,2,3,''],
+		b: NaN,
+		c: Infinity,
+		d: null,
+		e: undefined,
+		f: function() {return "ok"}
+	};
+	console.log(ob6);
+
+	var jsonString = JSON.stringify(ob6);
+	console.log(jsonString);
+
+	var jsonParse = JSON.parse(jsonString);
+	console.log(jsonParse);
+
+	console.log(jsonParse === ob6);
+
+	var ob6 = {
+		x: 1,
+		y: 2
+	};
+
+	console.log(ob6.toString());
+
+	var a1 = [1,2,3,'string'];
+	console.log(a1.toString());
+
+
+	var ob7 = {
+		a: 1,
+		b: 2
+	};
+
+	console.log(ob7.toLocaleString());
+	console.log(ob7.toString === ob7.toLocaleString()); // false
+
+	// console.log(ob7.toJSON());
+
+	console.log(ob7.valueOf());
+
+	var a2 = [1,2,3,4];
+	console.log(a2.valueOf());
+
+	var a3 = [1];
+	console.log(a3.valueOf());
+
+	var a4 = [];
+	console.log(a4.valueOf());
+
+	var s1 = '1';
+	console.log(s1.valueOf());	
 </script>
 
 </html>

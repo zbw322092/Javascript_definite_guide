@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	f1();
+	// f2();
+	// v1();
+
+	function f1() {
+		console.log('it is f1');
+	}
+
+	var v1 = function f2() {
+		console.log('it is f2');
+	}
+
+
+	function f3() {
+		console.log(this);
+	}
+
+	f3(); // Window
+
+	function f4() {
+		'use strict'
+		console.log(this);
+	}
+
+	f4(); // undefined
+
+
+	var o1 = {
+		name: 'Bowen',
+		age: 24,
+		textAlert: function() {
+			console.log(this.name + ' is ' + this.age + ' years old');
+		}
+	};
+	o1.textAlert();
+
+	var o2 = {
+		name: 'Bowen',
+		age: 24,
+		textAlert: function() {
+			console.log(this);
+			console.log(name + ' is ' + age + ' years old');
+		}
+	};
+	// o2.textAlert();
+
+
+	function f5() {
+		f6();
+		function f6() {
+			console.log(this); // Window
+			console.log('this is f6');
+		}
+	}
+	f5();
+
+
+	function F7() {
+		console.log('this is F7');
+	}
+
+	F7.prototype.name = function () {
+		console.log('I am ' + this.yourName);
+	};
+
+	var o3 = new F7;
+	o3.yourName = 'Bowen';
+	console.log(o3);
+	o3.name(); // I am Bowen
+
+
+	
+
+	function F8() {
+		return {
+			name: "Bowen",
+			age: 24
+		}
+	}
+
+	F8.prototype.yourName = function () {
+		console.log('I am ' + this.yourName);
+	};
+
+	var o4 = new F8;
+
+	console.log(o4);
+	console.log(o4.yourName);
+
+
+	function F9() {
+		return "Bowen";
+	}
+
+	F9.prototype.yourName = function () {
+		console.log('I am ' + this.yourName);
+	};
+
+	var o5 = new F9;
+
+	console.log(o5);
+	console.log(o5.yourName);
+
+	function f10(x) {
+		console.log(x); // 99
+		arguments[0] = 10;
+		console.log(x); // 10
+	}
+
+	f10(99);
+
+
+	function f11(name) {
+		console.log(arguments);
+		console.log(arguments.caller);
+		console.log(arguments.callee);
+		console.log("your name is " + name);
+	}
+	f11();
+
+	function f12(x) {
+		if (x < 1) return 1;
+		return x * arguments.callee(x-1);
+	}
+
+	console.log(f12(4)); // 23   4*3*2*1 = 24
+
+	
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

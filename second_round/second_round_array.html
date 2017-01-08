@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	var a1 = new Array();
+	console.log(a1);
+
+	var a2 = new Array(10);
+	console.log(a2);
+	console.log(a2.length); // 10
+	console.log(a2[3]); // undefined
+
+	var a3 = new Array(1,2,3, 'it is an array');
+	console.log(a3);
+
+	console.log(a3[1.2]); // undefined
+	console.log(a3[1.0000]); // 2
+
+	a3[-1.23] = 'here';
+	a3["999"] = true;
+	console.log(a3);
+	console.log(a3[-1.23]); // here
+
+
+	var a4 = [,,];
+	var a5 = new Array(5);
+	
+	console.log(a4);
+	console.log(a5);
+
+	console.log(a4.length); // 2
+	console.log(a5.length); // 5
+
+	console.log(0 in a4); // false
+	console.log(0 in a5); // false
+
+	var a6 = [,];
+	var a7 = [undefined];
+	
+	console.log(a6);
+	console.log(a7);
+
+	console.log(a6.length); // 1
+	console.log(a7.length); // 1
+
+	console.log(0 in a6); // false
+	console.log(0 in a7); // true
+
+	var a8 = [1,2,3,,8,,,,10];
+	console.log(a8);
+	console.log(a8.length);
+	console.log(a8[3]);
+	console.log(a8[4]);
+
+
+	var a9 = [1,2,3,4,5,6];
+	a9.length = 3;
+	console.log(a9); // [1, 2, 3]
+
+	var a10 = [1,2,3,4,5,6];
+	Object.defineProperty(a10, "length", {
+		writable: false
+	});
+	a10.length = 3;
+	console.log(a10); // 并未改变
+
+	delete a10[3];
+	console.log(a10);
+	console.log(a10.length); // 长度任然是6，数组变成了稀疏数组。
+
+	var a11 = [1,2,3,4];
+	console.log(a11);
+	console.log(a11.length);
+	delete a11[2];
+	console.log(a11);
+	console.log(a11.length);
+
+	a12 = [1,2,3,4,5,6];
+	Object.defineProperty(a12, '3', {
+		configurable: false
+	});
+	a12.length = 2;
+	console.log(a12);
+
+
+	var a13 = [1,2,3,4,5,6];
+	delete a13[4];
+	console.log(4 in a13); // false
+
+	console.log(Object.keys(a13));
+
+
+	var a14 = [1,2,3,,,,,,6,9];
+	console.log(a14.length); // 10
+	console.log(Object.keys(a14));
+	console.log(a14[4]);
+	console.log(Object.getOwnPropertyDescriptor(a14, "4")); // undefined
+
+
+	var a15 = [1,2,3,[4,5]];
+	console.log(a15.reverse());
+	console.log(a15);
+
+	var a16 = [1,2,,,,4];
+	console.log(a16.reverse());
+
+	var a17 = ["badnwn", "ycbawk", "pvsbibev", "wwdcak", "ndkwbak"];
+	console.log(a17.sort()); // ["badnwn", "ndkwbak", "pvsbibev", "wwdcak", "ycbawk"]
+	console.log(a17); // 会替换原来的数组
+
+	var a18 = ["badnwn", "ycbawk", undefined, "pvsbibev", "wwdcak", "ndkwbak"];
+	console.log(a18.sort()); // ["badnwn", "ndkwbak", "pvsbibev", "wwdcak", "ycbawk", undefined]  undefined被排在了末尾
+
+	var a19 = ["badnwn", "ycbawk", undefined, "pvsbibev", 23, 12, "wwdcak", "ndkwbak"];
+	console.log(a19.sort()); // [12, 23, "badnwn", "ndkwbak", "pvsbibev", "wwdcak", "ycbawk", undefined]
+
+	var a20 = ["badnwn", null, "ycbawk", undefined, "pvsbibev", 23, 12, "wwdcak", "ndkwbak"];
+	console.log(a20.sort());
+	// [12, 23, "badnwn", "ndkwbak", null, "pvsbibev", "wwdcak", "ycbawk", undefined]
+	
+	var a21 = ["yadbk", "ffbek", "afn", "Ba", "pcna"];
+	console.log(a21.sort()); // ["Ba", "afn", "ffbek", "pcna", "yadbk"]
+
+
+	var a22 = [1,2,3];
+	console.log(a22.concat([4,5]));
+	console.log(a22); // 原来数组保持不变
+
+
+	var a23 = [1,2,3,4,5,6,7,8];
+	console.log(a23.slice(4,1)); // 返回一个空数组 []
+	console.log(a23.slice(4,4)); // 返回一个空数组 []
+
+	var a24 = [1,2,3,4,5,6,];
+	console.log(a24.splice(1,1)); // [2]
+	console.log(a24); // [1, 3, 4, 5, 6]
+
+	console.log(a24.splice(2,1,['a','b','c'])); // [4]
+	console.log(a24); // [1, 3, Array[3], 5, 6]
+
+	var a25 = [1,2,3,4,5];
+	console.log(a25.pop()); // 5  注意，这里返回的是元素，而不是数组
+	console.log(a25); // [1, 2, 3, 4]
+
+	console.log(a25.push('aaa')); // 5   注意，push()方法返回的是push之后数组的长度
+
+	a25.push('t1', 't2');
+	console.log(a25); // [1, 2, 3, 4, "aaa", "t1", "t2"]
+
+	var a26 = [1,2,3,[4,5]];
+	console.log(a26.join()); // 1,2,3,4,5
+
+	var a27 = [
+		{name: 'Bowen', age: 24},
+		{name: 'Bowen2', age: 25}
+	];
+	console.log(a27.join()); // [object Object],[object Object]
+	// 这里应该就是所说的在必要的时候对元素调用toString()方法，所以会产生上面这个结果。
+
+	var a28 = [
+		function() {
+			return "ok"
+		},
+		function() {
+			return "not ok"
+		}
+	];
+	console.log(a28.join()); // string形式的function源码。也是对元素调用toString()方法的结果。
+
+
+
+	function arrayForEach(o) {
+		o.forEach(function(value, key, array) {
+			array[key] = value*2;
+		});
+		return o;
+	}
+
+	var a29 = [1,2,3,4];
+	console.log(arrayForEach(a29)); // [2, 4, 6, 8]
+
+	var a30 = [1,2,,,,6];
+	console.log(a30);
+	console.log(arrayForEach(a30));
+
+	var a31 = [1,2,3,,,6];
+	var a32 = [9,10,11];
+	console.log(a31.map(function(value) {
+		value*value;
+	})); // [undefined, undefined, undefined, 5: undefined]  map中的函数要有返回值
+
+	console.log(a31.map(function(value) {
+		return value*value;
+	})); // [1, 4, 9, 5: 36]
+
+
+	var a33 = [1,2,undefined, 4];
+	var a34 = [1,2,, 4];
+	console.log(a33.filter(function(value) {
+		return true
+	})); // [1, 2, undefined, 4]  a33并不是稀疏数组
+
+	console.log(a34.filter(function(value) {
+		return true
+	})); // [1, 2, 4]  稀疏数组中缺失的元素被跳过
+
+
+	var a35 = [2,4,6,8,9];
+	var a36 = [2,4,6,8,10];
+	var a37 = [2,4,6,8,[10,12]];
+	var a38 = [2,4,6,8,[10,13]];
+
+	console.log(a35.every(function(value) {
+		return value%2 === 0;
+	})); // false
+
+	console.log(a36.every(function(value) {
+		return value%2 === 0;
+	})); // true
+
+	console.log(a37.every(function(value) {
+		return value%2 === 0;
+	})); // false
+
+	console.log(a38.every(function(value) {
+		return value%2 === 0;
+	})); // false
+
+	console.log(a35.some(function(value) {
+		return value%2 === 0;
+	})); // true
+
+	console.log(a36.some(function(value) {
+		return value%2 === 0;
+	})); // true
+
+
+	var a39 = [1,2,3,4,5];
+	console.log(a39.reduce(function(x, y) {
+		return x + y;
+	}, 0)); // 15
+
+	console.log(a39.reduce(function(x, y) {
+		return x + y;
+	}, 10)); // 25
+
+	var a40 = [];
+	var a41 = {name: "Bowen"};
+	var a42 = function() {};
+
+	console.log(Array.isArray(a40));  // true
+	console.log(Array.isArray(a41)); // false
+	console.log(Array.isArray(a42)); // false
+
+
+	var o1 = {
+		0: 'one',
+		1: 'two',
+		2: 'three',
+		3: 'four',
+		length: 4
+	};
+
+	console.log(Array.prototype.join.call(o1, '+')); // one+two+three+four
+
+	var s1 = 'it is a string';
+	console.log(Array.prototype.join.call(s1, '+'));	// i+t+ +i+s+ +a+ +s+t+r+i+n+g
+	console.log(s1[6]); // a
+	console.log(Array.prototype.filter.call(s1, function(x, i) {
+		return x === 's';
+	})); // ["s", "s"]
+
+	
+
+
+
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
