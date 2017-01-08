@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function type(o) {
+		var t, c, n; // type class name
+		if (o === null)
+			return "null"
+		if (o !== o)
+			return "nan";
+		// 如果typeof返回值不是"object",则使用这个值
+		if ((t = typeof o) !== "object")
+			return t;
+		// 返回对象的类名，除非值为"Object", 这种方式能识别出大多数的内置对象。
+		if ((c = classof(o)) !== "Object")
+			return c;
+		// 如果构造函数的名字存在的话，则返回构造函数的名字
+		if (o.constructor && typeof o.constructor === "function" && (n = o.constructor.getName()))
+			return n;
+		// 其他情况下一律返回"Object"
+		return "Object"
+	}
+
+	function classof(o) {
+		return Object.prototype.toString.call(o).slice(8,-1);
+	}
+
+	Function.prototype.getName = function() {
+		if ("name" in this)
+			return this.name;
+		return this.name = this.toString().match(/function\s*([^(] *)\(/)[1];
+	};
+
+
+	function F1() {
+		console.log('this is F1')
+	};
+	var o1 = new F1();
+	console.log(o1);
+	console.log(o1.constructor);
+	console.log(o1.prototype);
+	console.log(type(o1));
+
+	
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
