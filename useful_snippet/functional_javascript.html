@@ -63,6 +63,73 @@
 	console.log([1,3,5,7].every(odd)); // true
 
 
+	// 返回一个新的可以计算f(g(...))的函数
+	// 返回的函数h()将它所有的实参传入g(),然后将g()的返回值传入f()
+	// 调用f()和g()时候的this值和调用h()时的this值是同一个this。
+	function compose(f, g) {
+		return function() {
+			return f.call(this, g.apply(this, arguments));
+		};
+	}
+
+	var square = function(x) {
+		return x*x;
+	};
+
+	var sum = function(x, y) {
+		return x+y;
+	};
+
+	var squareofsum = compose(square, sum);
+	console.log(squareofsum);
+	console.log(squareofsum(2,3)); // 25
+
+
+	function array(a, n) {
+		return Array.prototype.slice.call(a, n || 0);
+	}
+
+	function partialLeft(f) {
+		var args = arguments;
+		console.log(args);
+		return function() {
+			var a = array(args, 1);
+			console.log(a);
+			a = a.concat(array(arguments));
+			console.log(a);
+			return f.apply(this, a);
+		};
+	}
+
+	function partialRight(f) {
+		var args = arguments;
+		return function() {
+			var a = array(arguments);
+			a = a.concat(array(args, 1));
+			return f.apply(this, a);
+		};
+	}
+
+	function partial(f) {
+		var args = arguments;
+		return function() {
+			var a = array(args, 1);
+			var i = 0, j = 0;
+			for (; i < a.length; i++)
+				if (a[i] === undefined)
+					a[i] = arguments[j++];
+				a = a.concat(array(arguments, j));
+				return f.apply(this, a);
+		};
+	}
+
+	var f = function(x,y,z) {
+		return x * (y-z);
+	};
+
+	console.log(partialLeft(f, 2)(3,4));
+	console.log(partialRight(f, 2)(3,4));
+	console.log(partial(f, undefined, 2)(3,4));
 
 </script>
 
