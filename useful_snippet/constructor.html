@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function typeAndValue(x) {
+		if (x == null) return ""; // null 和 undefined没有构造函数
+		switch (x.constructor) {
+			case Number:
+				return "Number: " + x;
+			case String:
+				return "String: " + x;
+			case Date:
+				return "Date: " + x;
+			case RegExp:
+				return "RegExp: " + x;
+		}
+	}
+
+	console.log(typeAndValue(null));
+	console.log(typeAndValue(123));
+	console.log(typeAndValue("123"));
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
