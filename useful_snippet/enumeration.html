@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function enumeration(namesToValues) {
+		var enumeration = function() {
+			throw "Cannot Instantiate Enumerations";
+		};
+
+		var proto = enumeration.prototype = {
+			constructor: enumeration,
+			toString: function() {return this.name;},
+			valueOf: function() {return this.value;},
+			toJSON: function() {return this.name;}
+		};
+
+		enumeration.values = [];
+
+		for (name in namesToValues) {
+			var e = Object.create(proto);
+			e.name = name;
+			e.value = namesToValues[name];
+			enumeration.values.push(e);
+		}
+
+		enumeration.foreach = function(f,c) {
+			for (var i = 0; i < this.values.length; i++)
+				f.call(c, this.values[i]);
+		};
+
+		return enumeration;
+	}
+
+	var card = enumeration({
+		Clubs: 1,
+		Diamonds: 2,
+		Hearts: 3,
+		Spades: 4
+	});
+	console.log(card);
+	console.log(card.values);
+
+
+	function Card(suit, rank) {
+		this.suit = suit;
+		this.rank = rank;
+	}
+
+	Card.Suit = enumeration({
+		Clubs: 1,
+		Diamonds: 2,
+		Hearts: 3,
+		Spades: 4
+	});
+
+
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
