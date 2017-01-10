@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+</body>
+
+<script type="text/javascript">
+	function defineSubclass(
+		/*父类的构造函数*/superclass,
+		/*新的子类的构造函数*/constructor,
+		/*实例方法:复制至原型中*/methods,
+		/*类属性:复制至构造函数中 */statics) {
+		constructor.prototype = Object.create(superclass.prototype);
+		constructor.prototype.constructor = constructor;
+
+		if(methods) extend(constructor.prototype, methods);
+		if(statics) extend(constructor, statics);
+	}
+
+	Function.prototype.extend = function(constructor, methods, statics) {
+		return defineSubclass(this, constructor, methods, statics);
+	};
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
